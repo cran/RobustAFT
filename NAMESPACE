@@ -1,0 +1,54 @@
+useDynLib(RobustAFT)
+import(stats)
+import(survival)
+importFrom(robustbase, lmrob.S, lmrob.control)
+importFrom(graphics, plot)
+
+export(TML.noncensored,TML.noncensored.control, TML1.noncensored, TML1.noncensored.control,
+        fits.compare, TML.censored, TML.censored.control.ref, TML.censored.control.tml)
+
+#TML1.Gauss + TML1.logWeibull = TML1.noncensored ,TML1.control= TML1.noncensored.control 
+
+# used internally - not intended to be visible to users
+# export(MM.E.gauss, MM.E.null, Ave.MM.gauss, MLnp, MLn1, tPsin, Discr, adaptn, 
+#        Scalen, Pspphi.n, Psizphi.n, s1psiphi.n, s2chiphi.n, 
+#        s1s1phi.n, s2s2phi.n, s2phi.n, Chiphi.n, Beta.n, invM2.n, 
+#        Cov2.n1, CovE.n, CovE.n1, E.Smat.n, E0vect.n, E0.vect.n,
+#        E1vect.n, E2vect.n, Q1mat.n, Q2vect.n, Q3sca.n)
+
+# export(MLwp, MLw1, F0w.s, F0w, zez, ezez, pezez, rhow, tutl, Izero,
+#        tPsiw, tChiw, tChiww, AveS20w, AveS2Pw, AveS21w , Fxdv, Nwtv,
+#        Discr, intmew, adaptw, Scalew, Pspphi.w, Pspzphi.w, Psiphi.w,
+#        Psizphi.w, Chiphi.w, s1phi.w, s2phi.w, Beta.w, s1pphi.w, s2pphi.w,
+#        s1pzphi.w, s2pzphi.w, s1psiphi.w, s1chiphi.w, s2psiphi.w, s2chiphi.w,
+#        s1s1phi.w, s1s2phi.w, s2s2phi.w, invM2.w, Cov2.w, invM2.w1,
+#        Cov2.w1, CovE.w, CovE.w1, E.Smat, E0vect, E0.vect, E1vect, 
+#        E2vect, Q1mat, Q2vect, Q3sca) 
+
+# export(psi.weight, psp.weight, chi.weight, rho.weight)
+
+# export(plot.fits.compare, print.fits.compare, summary.TML, print.TML, 
+#	   print.summary.TML, predict.TML, plot.TML, coef.TML, vcov.TML)
+
+# export(BtamatG, BtamatW, CandidateG, CandidateW, Chidnorm, Chidlweibul,
+# 	 ChiSG, ChiSN, ChiSw, Cov.Gauss, Cov.LogW, CutoffN, CutoffW, CutofrN, 
+#	 dfcomn2, dlweibul, IChidlweibul, IChidnorm, intg0, intg0.TMLW, intg1.TMLW,
+#	 intg2, intg2.TMLW, intw0, intw1, intxlwbl, IPsidnorm, Nrm2, plweibul,
+#	 ps0, ps0W, ps1, ps1W, Psidnorm, PsiSG, PsiSN, PsiSw, psp0W, psp1W,
+#	 PspSG, PspSN, PspSw, QMatrix.G, QMatrix.W, RappN, RappW, RefAve2G,
+#	 RefAve2W, RefBetaG, RefBetaW, RefSG, RefSigmaG, RefSigmaW, RefSW,
+#	 regfal, ResExpG, ResExpW, s.eq.Gauss, s.eq.LogW, SparamG.S, SparamW.S, 
+#	 TML.Ave2G, TML.Ave2W, TML.BetaG, TML.BetaW, TML.Gauss, TML.logweibull,
+#	 TML.SigmaG, TML.SigmaW, TMLeqn2W, TMLG, TMLW, TMLjac11.G, TMLjac21.G,
+#	 TMLjac12.G, TMLjac22.G, TMLjac11.W, TMLjac21.W, TMLjac12.W, TMLjac22.W,
+#	 tutl, uf0, uf0w, ww, xlwbl)	
+
+S3method(coef, TML)
+S3method(plot, fits.compare)
+S3method(plot, TML)
+S3method(predict, TML)
+S3method(print, fits.compare)
+S3method(print, summary.TML)
+S3method(print, TML)
+S3method(summary, TML)
+S3method(vcov, TML)
