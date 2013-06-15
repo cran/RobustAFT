@@ -1,7 +1,7 @@
 "MM.E.gauss" <-
 function(y, cov=FALSE, isigma=1, onlyS=FALSE, test=FALSE, level=0.90, control, ...){
   call <- match.call(); n   <- length(y)
-  old <- comval();      tlo <- control$tlo; mxf <- control$mxf
+  old <- comval2();     tlo <- control$tlo; mxf <- control$mxf
   mxs <- control$mxs;   ntm <- control$ntm; tls <- control$tls  
   k0  <- control$k0;    k1  <- control$k1 ; h   <- control$h
   Beta<- control$Beta0 
@@ -20,7 +20,7 @@ function(y, cov=FALSE, isigma=1, onlyS=FALSE, test=FALSE, level=0.90, control, .
 # 1. Initial estimates (l0,s0) of location and scale 
 
   l0   <- median(y); s0 <- median(abs(y-l0))/.6745
-  dfcomn(ipsi=4, xk=k0, beta=Beta)
+  dfcomn2(ipsi=4, xk=k0, beta=Beta)
   y1   <- min(y); yn <- max(y)
   yseq <- matrix(seq(y1, yn, length=h+1), ncol=1)
   z    <- apply(yseq,1,s.estim,s0,y,tlo,mxs)
@@ -44,7 +44,7 @@ function(y, cov=FALSE, isigma=1, onlyS=FALSE, test=FALSE, level=0.90, control, .
 
 # 3. Final estimates
 
-  dfcomn(ipsi=4, xk=k1)
+  dfcomn2(ipsi=4, xk=k1)
   Qmm0 <- sum(Rho(r0/s0))/(n-1)
   zf <- lywalg(y, lambda=l0, sigmai=s0, tol=tlo, gam=1, 
                isigma=0, maxit=mxf, maxis=1, nitmon=ntm)
@@ -58,7 +58,7 @@ function(y, cov=FALSE, isigma=1, onlyS=FALSE, test=FALSE, level=0.90, control, .
 
 # 4. Scale estimate for test
 
-    dfcomn(ipsi = 4, xk = k0, beta = Beta)
+    dfcomn2(ipsi = 4, xk = k0, beta = Beta)
     zs <- rysigm(r1,wgt=y,sigmai=2*s0,np=1,itype=1,isigma=1,tol=tlo,maxis=mxs)
     s1 <- zs$sigmaf
     if(s1 < tls) {cat(paste("Final scale less than tls = ", tls, "\n")); return(MM.E.null())}
@@ -69,11 +69,11 @@ function(y, cov=FALSE, isigma=1, onlyS=FALSE, test=FALSE, level=0.90, control, .
 
   tbias <- NA;  pchi  <- NA
   if (test) {
-    dfcomn(ipsi = 4, xk = k1)
+    dfcomn2(ipsi = 4, xk = k1)
     tmp <- r0/s0
     sc0 <- Psi(tmp)
     s1p <- sum(Psp(tmp))/n
-    dfcomn(ipsi = 4, xk = k0)
+    dfcomn2(ipsi = 4, xk = k0)
     s0p <- sum(Psp(tmp))/n
     sc1 <- Psi(tmp)
     tmp <- tmp * Psi(tmp)
@@ -110,6 +110,6 @@ function(y, cov=FALSE, isigma=1, onlyS=FALSE, test=FALSE, level=0.90, control, .
   qn <- NA
   if (isigma==2) {qn <- Qn(y)$scale; ans$sigma <- qn
                   if (cov) ans$V.sigma <- qn*qn*0.6089}
-  dfcomn(ipsi = old$ipsi, xk = old$xk, beta = old$bta)
+  dfcomn2(ipsi = old$ipsi, xk = old$xk, beta = old$bta)
   ans$call <- call; ans}
 

@@ -9,6 +9,10 @@ summary.TML<-function(object, ...)
   pi <- length(coefs)
   df <- c(p, n - p, pi)
   covmat <- object$COV
+  if (is.null(covmat)) {
+   cat("An estimate of the covariance matrix is required in object.\n",
+       "Set cov='parametric' or cov='nonparametric'.\n") 
+   return()}
   s.err <- sqrt(diag(covmat))[-(p + 1)]
   tvalue <- coefs/s.err
   pvalue <- 2 * pnorm(-abs(tvalue))
@@ -20,3 +24,5 @@ summary.TML<-function(object, ...)
   class(ans) <- "summary.TML"
   return(ans)
 }
+
+

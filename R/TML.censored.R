@@ -1,7 +1,7 @@
 TML.censored<-function(formula, delta, data, errors = "Gaussian", initial = "S",  input = NULL, 
-              otp = "fixed", cu = NULL, control.S=list(), control.ref=list(), control.tml=list())
+              otp = "fixed",  cov=TRUE, cu = NULL, control.S=list(), control.ref=list(), control.tml=list())
 {
-  if(!(errors %in% c("Gaussian", "logWeibull")))
+  if(!(errors %in% c("Gaussian", "log-Weibull")))
 		stop(gettextf("Errors distribution should be Gaussian or log-Weibull"))
   if(!(initial %in% c("S", "input")))
                 stop(gettextf("initial should be S or input"))
@@ -96,8 +96,8 @@ TML.censored<-function(formula, delta, data, errors = "Gaussian", initial = "S",
     rs0         <- as.vector(y-X%*%Beta.tilde)/sigma.tilde
     d.Beta      <- (Beta.hat-Beta.tilde)/sigma.tilde
     d.sigma     <- sigma.hat/sigma.tilde
-
-    Cov <- Cov.Gauss(d.Beta,d.sigma,sigma.tilde,rs0,delta,X,tu,const)
+    Cov         <- NULL
+    if (cov) Cov <- Cov.Gauss(d.Beta,d.sigma,sigma.tilde,rs0,delta,X,tu,const)
     
     # Identifying the outliers
     
@@ -117,7 +117,7 @@ TML.censored<-function(formula, delta, data, errors = "Gaussian", initial = "S",
   }
   
   # Log-Weibull errors
-  if(errors == "logWeibull"){
+  if(errors == "log-Weibull"){
   
     if (initial == "S") {   
       # Parametric S
@@ -173,8 +173,8 @@ TML.censored<-function(formula, delta, data, errors = "Gaussian", initial = "S",
     rs0         <- as.vector(y-X%*%Beta.tilde)/sigma.tilde
     d.Beta      <- (Beta.hat-Beta.tilde)/sigma.tilde
     d.sigma     <- sigma.hat/sigma.tilde
-  
-    Cov <- Cov.LogW(d.Beta,d.sigma,sigma.tilde,rs0,delta,X,tl,tu,const)
+    Cov         <- NULL
+    if (cov) Cov <- Cov.LogW(d.Beta,d.sigma,sigma.tilde,rs0,delta,X,tl,tu,const)
     
     # Identifying the outliers
     

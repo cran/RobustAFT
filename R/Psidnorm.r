@@ -1,4 +1,3 @@
-Psidnorm <- function(u)
-{
-  PsiSN(u)*dnorm(u)
-}
+Psidnorm <-
+function(u){PsiSN(u)*dnorm(u)}
+

@@ -14,7 +14,7 @@ if (initial=="S")     {if (fastS) {
                           zctrl <- lmrob.control(...)                         
                           z     <- lmrob.S(X,y,zctrl); th0 <- z$coef; v0 <- z$scale}
                        else {                              
-                          z  <- dfcomn(ipsi=4,xk=xk,beta=beta)
+                          z  <- dfcomn2(ipsi=4,xk=xk,beta=beta)
                           if (np <= 2 & n <= 500) iopt <- 3 else iopt <- 1; if (nrep!=0) iopt <- 2
                           z  <- hysest(X,y,np+1,iopt=iopt,intch=1,nrep=nrep,tols=tol,tolr=tol,iseed=seed)
                          th0 <- z$theta[1:np]; v0  <- z$smin}

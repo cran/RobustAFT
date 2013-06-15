@@ -509,89 +509,37 @@ C
 C
 C-----------------------------------------------------------------------
 C
-      SUBROUTINE DFCOMN(IPSI,C,H1,H2,H3,XK,D,BTA,BT0,IUCV,A2,B2,CHK,CKW,
-     +                  BB,BT,CW,EM,CR,VK,NP,ENU,V7,IWWW)
+      SUBROUTINE ZDFVALS(IO,DFV)
+C.......................................................................
+
+CC   AUTHOR : A. RANDRIAMIHARISOA
 C.......................................................................
 C
-C   COPYRIGHT  1992  Alfio Marazzi
-C
-C   AUTHOR : A. RANDRIAMIHARISOA
-C.......................................................................
-C
-      COMMON/UCVPR/JUCV,AA,AB,PHK,PKW,PBB,PBT,PW
-      COMMON/UCV56/PM,PCR,PK,NNP,PNU,P7
-      COMMON/PSIPR/JPSI,PC,PH1,PH2,PH3,PXK,PD
-      COMMON/WWWPR/JWWW
-      COMMON/BETA/BETA,BET0
-      IF (IPSI.GE.-5) JPSI=IPSI
-      IF (C .GE.0.)  PC=C
-      IF (H1.GE.0.)  PH1=H1
-      IF (IPSI.EQ.10) PH1=H1
-      IF (H2.GE.0.)  PH2=H2
-      IF (H3.GE.0.)  PH3=H3
-      IF (XK.GE.0.)  PXK=XK
-      IF (D .GE.0.)  PD=D
-      IF (BTA.GE.0.) BETA=BTA
-      IF (BT0.GE.0.) BET0=BT0
-      IF (IUCV.GE.0) JUCV=IUCV
-      IF (A2.GE.0.)  AA=A2
-      IF (B2.GE.0.)  AB=B2
-      IF (CHK.GE.0.) PHK=CHK
-      IF (CKW.GE.0.) PKW=CKW
-      IF (BB.GE.0.)  PBB=BB
-      IF (BT.GE.0.)  PBT=BT
-      IF (CW.GE.0.)  PW=CW
-      IF (EM.GT.0.)  PM=EM
-      IF (CR.GT.0.)  PCR=CR
-      IF (VK.GT.0.)  PK=VK
-      IF (NP.GT.0)   NNP=NP
-      IF (ENU.GT.0.) PNU=ENU
-      IF (V7.GT.0.)  P7=V7
-      IF (IWWW.GE.0) JWWW=IWWW
-      RETURN
-      END
-C
-C-----------------------------------------------------------------------
-C
-      SUBROUTINE COMVAL(IPSI,C,H1,H2,H3,XK,D,BTA,BT0,IUCV,A2,B2,CHK,
-     +                  CKW,BB,BT,CW,EM,CR,VK,NP,ENU,V7,IWWW)
-C.......................................................................
-C
-C   COPYRIGHT  1992  Alfio Marazzi
-C
-C   AUTHOR : A. RANDRIAMIHARISOA
-C.......................................................................
-C
-      COMMON/UCVPR/JUCV,AA,AB,PHK,PKW,PBB,PBT,PW
-      COMMON/UCV56/PM,PCR,PK,NNP,PNU,P7
-      COMMON/PSIPR/JPSI,PC,PH1,PH2,PH3,PXK,PD
-      COMMON/WWWPR/JWWW
-      COMMON/BETA/BETA,BET0
-      IPSI=JPSI
-      C=PC
-      H1=PH1
-      H2=PH2
-      H3=PH3
-      XK=PXK
-      D=PD
-      BTA=BETA
-      BT0=BET0
-      IUCV=JUCV
-      A2=AA
-      B2=AB
-      CHK=PHK
-      CKW=PKW
-      BB=PBB
-      BT=PBT
-      CW=PW
-      EM=PM
-      CR=PCR
-      VK=PK
-      NP=NNP
-      ENU=PNU
-      V7=P7
-      IWWW=JWWW
-      RETURN
+      REAL DFV(66),VALS(66),VALZ(66)
+      DATA VALS(1:66)/1.e-3, 1., 1., 30., 0., 1.e-6, 1.e-11, 2., 1., 1., 
+     +     1., 2., 1., 1., 1., 0.025, 1.345, 10.0, 1.e-4, 1., 1., 1., 
+     +     0., 150., 50., 50., 2., 1.25, 1., 1., 1., 1., 0.0, 0.0 , 1.0,
+     +     1., 1., 150., 0.0 , 0.0, 1., 150., 1.e-3, 1.e-3, 30., 2. ,
+     +     1., 1313., 1., 0.1, 1., 0., 9., 1.345, 2., 1., -6.9078, 
+     +     1.e-3, 1. , 1. , 1.345, 1., 50., 1. , 1., 1./
+      DATA VALZ(1:66)/1.e-3, 1., 1., 30., 0., 1.e-6, 1.e-11, 2., 1., 1., 
+     +     1., 2., 1., 1., 1., 0.025, 1.345, 10.0, 1.e-4, 1., 1., 1., 
+     +     0., 150., 50., 50., 2., 1.25, 1., 1., 1., 1., 0.0, 0.0 , 1.0,
+     +     1., 1., 150., 0.0 , 0.0, 1., 150., 1.e-3, 1.e-3, 30., 2. ,
+     +     1., 1313., 1., 0.1, 1., 0., 9., 1.345, 2., 1., -6.9078, 
+     +     1.e-3, 1. , 1. , 1.345, 1., 50., 1. , 1., 1./
+
+      IF (IO.EQ.0) THEN
+       DO 100 I=1,66
+ 100   DFV(I)=VALS(I)
+      ELSEIF (IO.EQ.1) THEN
+       DO 200 I=1,66
+ 200   VALS(I)=DFV(I)
+      ELSE
+       DO 300 I=1,66
+ 300   VALS(I)=VALZ(I)
+      ENDIF
+      RETURN 
       END
 C
 C-----------------------------------------------------------------------

@@ -1,4 +1,3 @@
-dlweibul <- function(z)
-{
-  exp(z-exp(z))
-}
+dlweibul <-
+function(z){ exp(z-exp(z))  }
+

@@ -1,4 +1,3 @@
-Chidnorm <- function(u)
-{
-  ChiSN(u)*dnorm(u)
-}
+Chidnorm <-
+function(u){ChiSN(u)*dnorm(u)}
+

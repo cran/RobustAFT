@@ -2914,7 +2914,7 @@ C
 C
 C.......................................................................
 C   PROGRAMMER : A. RANDRIAMIHARISOA
-C   LINT: 1=Gumbel, 2=LogWeibull
+C   LINT: 1=Gumbel, 2=Log-Weibull
 C.......................................................................
 C
       DOUBLE PRECISION DBETA(NP+1),X(MDX,NP),Y(N),DS,RSID,AI,
@@ -2972,7 +2972,7 @@ C
 C
 C.......................................................................
 C   PROGRAMMER : A. RANDRIAMIHARISOA
-C   LINT: 1=Gumbel, 2=LogWeibull
+C   LINT: 1=Gumbel, 2=Log-Weibull
 C.......................................................................
 C
       DOUBLE PRECISION DBETA(NP),X(MDX,NP),Y(N),DS,RSID,AI,
@@ -3029,7 +3029,7 @@ C
 C
 C.......................................................................
 C   PROGRAMMER : A. RANDRIAMIHARISOA
-C   LINT: 1=Gumbel, 2=LogWeibull
+C   LINT: 1=Gumbel, 2=Log-Weibull
 C.......................................................................
 C
       DOUBLE PRECISION DBETA(NP),X(MDX,NP),Y(N),DS,RSID,AI,
@@ -4405,4 +4405,46 @@ C
       IF (IWWW.GE.0) JWWW=IWWW
       RETURN
       END
-
+C
+C-----------------------------------------------------------------------
+C
+      SUBROUTINE COMVAL2(IPSI,C,H1,H2,H3,XK,D,BTA,BT0,IUCV,A2,B2,CHK,
+     +                  CKW,BB,BT,CW,EM,CR,VK,NP,ENU,V7,IWWW)
+C.......................................................................
+C
+C   COPYRIGHT  1992  Alfio Marazzi
+C
+C   AUTHOR : A. RANDRIAMIHARISOA
+C.......................................................................
+C
+      COMMON/UCVPR/JUCV,AA,AB,PHK,PKW,PBB,PBT,PW
+      COMMON/UCV56/PM,PCR,PK,NNP,PNU,P7
+      COMMON/PSIPR/JPSI,PC,PH1,PH2,PH3,PXK,PD
+      COMMON/WWWPR/JWWW
+      COMMON/BETA/BETA,BET0
+      IPSI=JPSI
+      C=PC
+      H1=PH1
+      H2=PH2
+      H3=PH3
+      XK=PXK
+      D=PD
+      BTA=BETA
+      BT0=BET0
+      IUCV=JUCV
+      A2=AA
+      B2=AB
+      CHK=PHK
+      CKW=PKW
+      BB=PBB
+      BT=PBT
+      CW=PW
+      EM=PM
+      CR=PCR
+      VK=PK
+      NP=NNP
+      ENU=PNU
+      V7=P7
+      IWWW=JWWW
+      RETURN
+      END

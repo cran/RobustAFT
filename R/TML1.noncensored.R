@@ -1,5 +1,5 @@
 "TML1.noncensored" <-
-function(y,errors= c("Gaussian", "logWeibull"), cu=NULL, initial=c("S","input"),otp=c("adaptive","fixed"),
+function(y,errors= c("Gaussian", "log-Weibull"), cu=NULL, initial=c("S","input"),otp=c("adaptive","fixed"),
                cov=c("no","parametric","nonparametric"),input=NULL, control = list(), ...)
 #               iv=1,ctrg=NULL)
 {
@@ -9,9 +9,9 @@ function(y,errors= c("Gaussian", "logWeibull"), cu=NULL, initial=c("S","input"),
         maxit <- control$maxit
         tol <- control$tol
         n <- length(y)
- if (initial=="S")     {old <- comval(); dfcomn(ipsi=4, xk=1.5477)
+ if (initial=="S")     {old <- comval2(); dfcomn2(ipsi=4, xk=1.5477)
                         Beta0 <- integrate(RobustAFT:::Chiphi, -10, 10)$value
-                        dfcomn(ipsi=old$ipsi, xk=old$xk)
+                        dfcomn2(ipsi=old$ipsi, xk=old$xk)
                         ctrS <- c(TML1.noncensored.control.S(...), k0=1.5477, k1=4.6873, Beta0=Beta0)
                        }
 if(errors == "Gaussian"){
@@ -39,7 +39,7 @@ if(errors == "Gaussian"){
  res  <- c(res,list(CV0=K$CV0,CV1=K$CV1))}
 }
 
-if(errors == "logWeibull"){
+if(errors == "log-Weibull"){
   if (is.null(cu)) cu <- 1.855356
         cl <- Izero(cu)
 

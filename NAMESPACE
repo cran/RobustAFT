@@ -5,7 +5,7 @@ importFrom(robustbase, lmrob.S, lmrob.control)
 importFrom(graphics, plot)
 
 export(TML.noncensored,TML.noncensored.control, TML1.noncensored, TML1.noncensored.control,
-        fits.compare, TML.censored, TML.censored.control.ref, TML.censored.control.tml)
+        fits.compare, TML.censored, TML.censored.control.S, TML.censored.control.ref, TML.censored.control.tml)
 
 #TML1.Gauss + TML1.logWeibull = TML1.noncensored ,TML1.control= TML1.noncensored.control 
 

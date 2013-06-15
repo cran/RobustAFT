@@ -1,6 +1,6 @@
 "rysigm" <-
-function(rs,wgt,exchi=chi,sigmai,np,tol=.dFvGet()$tlo,itype=.dFvGet()$ite,
-isigma=.dFvGet()$isg,maxis=.dFvGet()$mxt) {
+function(rs,wgt,exchi=chi,sigmai,np,tol=.dfvGet()$tlo,itype=.dfvGet()$ite,
+isigma=.dfvGet()$isg,maxis=.dfvGet()$mxt) {
 if (missing(rs)) messagena("rs")
 if (missing(wgt)) messagena("wgt")
 if (missing(sigmai)) messagena("sigmai")

@@ -1,4 +1,3 @@
-zez  <- function(z,const)
-{
-  exp(z)*const-z
-}
+zez <-
+function(z,const){exp(z)*const-z}
+

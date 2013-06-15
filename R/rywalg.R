@@ -1,7 +1,7 @@
 "rywalg" <-
 function(x,y,theta,wgt,cov,psp0=psp(0),expsi=psi,exchi=chi,exrho=rho,
-sigmai,tol=.dFvGet()$tlo,gam=.dFvGet()$gma,tau=.dFvGet()$tua,itype=.dFvGet()$ite,isigma=.dFvGet()$isg,
-icnv=.dFvGet()$icn,maxit=.dFvGet()$mxt,maxis=.dFvGet()$mxs,nitmon=.dFvGet()$ntm) {
+sigmai,tol=.dfvGet()$tlo,gam=.dfvGet()$gma,tau=.dfvGet()$tua,itype=.dfvGet()$ite,isigma=.dfvGet()$isg,
+icnv=.dfvGet()$icn,maxit=.dfvGet()$mxt,maxis=.dfvGet()$mxs,nitmon=.dfvGet()$ntm) {
 if (missing(x)) messagena("x")
 if (missing(y)) messagena("y")
 if (missing(wgt)) messagena("wgt")

@@ -5,8 +5,8 @@ Control parameters for S-estimate of location and scale
 }
 \description{
       Auxiliary function for \code{\link{TML1.noncensored}}. Typically only used
-      internally by \code{TML1.noncensored}, but may be used to construct a control argument.
-      This function provides default values.
+      internally by \code{TML1.noncensored}, but may be used to construct a control 
+      argument. This function provides default values.
 }
 \usage{
 TML1.noncensored.control.S(tlo = 1e-04, mxf = 50, mxs = 50, ntm = 50,
@@ -29,5 +29,4 @@ List containing the desired values for each of the control parameters, plus the 
 Beta0 of \eqn{\beta}.
 }
 
-\keyword{misc }
 

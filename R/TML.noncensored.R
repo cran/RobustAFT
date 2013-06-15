@@ -1,7 +1,7 @@
 TML.noncensored<-function(formula, data, errors = "Gaussian", cu = NULL, initial = "S",
   otp = "fixed", cov = "parametric", input = NULL, control = list(), ...)
 {
-	if(!(errors %in% c("Gaussian", "logWeibull")))
+	if(!(errors %in% c("Gaussian", "log-Weibull")))
 		stop(gettextf("Errors distribution should be Gaussian or log-Weibull"))
 	if(!(initial %in% c("S", "input")))
     stop(gettextf("initial should be S or input"))
@@ -58,7 +58,7 @@ TML.noncensored<-function(formula, data, errors = "Gaussian", cu = NULL, initial
                                 nit0 <- z$k.iter
 			}
 			else {
-				z <- dfcomn(ipsi = 4, xk = xk, beta = beta)
+				z <- dfcomn2(ipsi = 4, xk = xk, beta = beta)
 				if (np <= 2 & n <= 500)
 					iopt <- 3
 				else iopt <- 1
@@ -115,7 +115,7 @@ TML.noncensored<-function(formula, data, errors = "Gaussian", cu = NULL, initial
 			res <- c(res, list(COV = K$CV1))
 		}
 	}
-	if(errors == "logWeibull"){
+	if(errors == "log-Weibull"){
 		if(is.null(cu))
 			cu <- 1.855356
 		cl <- Izero(cu)
@@ -137,7 +137,7 @@ TML.noncensored<-function(formula, data, errors = "Gaussian", cu = NULL, initial
 				else iopt <- 1
 				if (nrep != 0)
 					iopt <- 2
-				z <- dfcomn(ipsi = 4, xk = xk, beta = beta)
+				z <- dfcomn2(ipsi = 4, xk = xk, beta = beta)
 				z <- hysest(X, y, nq = np + 1, iopt = iopt, intch = 1,
 					nrep = nrep, tols = tol, tolr = tol, iseed = seed)
 				th0 <- z$theta[1:np]

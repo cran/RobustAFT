@@ -20,7 +20,7 @@ if (initial=="S")     if (fastS) {
                        else { 
                        if (np <= 2 & n <= 500) iopt <- 3 else iopt <- 1; if (nrep!=0) iopt <- 2
 #                      z   <- S.hysest(X,y,iopt,nrep,np+1,ips,xk,beta,time=F,seed=seed)
-                       z   <- dfcomn(ipsi=4,xk=xk,beta=beta)
+                       z   <- dfcomn2(ipsi=4,xk=xk,beta=beta)
                        z   <- hysest(X,y,nq=np+1,iopt=iopt,intch=1,nrep=nrep,tols=tol,tolr=tol,iseed=seed)
                        th0 <- z$theta[1:np]; v0  <- z$smin
                        b0  <- -0.1352; th0[1] <- th0[1]-b0*v0}

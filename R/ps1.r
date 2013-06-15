@@ -1,4 +1,3 @@
-ps1    <- function(u)
-{
-  u*(exp(u)-1)
-}
+ps1 <-
+function(u) {u*(exp(u)-1)}
+

@@ -2,22 +2,23 @@
 \alias{TML.censored}
 \title{Truncated Maximum Likelihood Regression With Censored Observations}
 \description{
-      This function computes the truncated maximum likelihood estimates of accelerated failure time regression 
-      described in Locatelli et al. (2010). 
-      The error distribution is assumed to follow approximately a Gaussian or a log-Weibull distribution.
+      This function computes the truncated maximum likelihood estimates of accelerated 
+      failure time regression described in Locatelli et al. (2010). 
+      The error distribution is assumed to follow approximately a Gaussian or a 
+      log-Weibull distribution. 
       The cut-off values for outlier rejection are fixed or adaptive.
 }
 \usage{
 TML.censored(formula, delta, data, errors = "Gaussian",  initial = "S", 
-             input = NULL, otp = "fixed", cu = NULL, control.S=list(), 
+             input = NULL, otp = "fixed", cov=TRUE, cu = NULL, control.S=list(), 
              control.ref=list(), control.tml=list())
 }
 \arguments{
-  \item{formula}{ A \code{\link[stats]{formula}}, i.e., a symbolic description of the model
-              to be adjusted (cf. \code{\link[stats]{glm}} or \code{\link[stats]{lm}}). }
+  \item{formula}{ A \code{\link[stats]{formula}}, i.e., a symbolic description of the
+         model to be adjusted (cf. \code{\link[stats]{glm}} or \code{\link[stats]{lm}}).}
   \item{data}{ An optional data frame containing the variables in the model. If not
-              found in \code{data}, the variables are taken from \code{environment(formula)},
-              typically the environment from which \code{robaft} is called. }
+          found in \code{data}, the variables are taken from \code{environment(formula)},
+          typically the environment from which \code{robaft} is called. }
   \item{delta}{ Vector of 0 and 1. 
       \itemize{
           \item 0: censored observation.
@@ -25,7 +26,7 @@ TML.censored(formula, delta, data, errors = "Gaussian",  initial = "S",
   \item{errors}{
     \itemize{
         \item "Gaussian": the error distribution is assumed to be Gaussian.
-        \item "logWeibull" : the error distribution is assumed to be log-Weibull.}}  
+        \item "log-Weibull" : the error distribution is assumed to be log-Weibull.}}  
   \item{initial}{
       \itemize{
         \item "S": initial S-estimate.
@@ -37,39 +38,47 @@ TML.censored(formula, delta, data, errors = "Gaussian",  initial = "S",
       \itemize{
         \item "adaptive": adaptive cut-off.
         \item "fixed": non adaptive cut-off.}}
+  \item{cov}{ If TRUE the covariance matrix is computed.}
   \item{cu}{ Preliminary minimal upper cut-off. 
-             The default is 2.5 in the Gaussian case and 1.855356 in the log-Weibull case. }  
-  \item{control.S}{ A list of control parameters for the computation of the initial S estimates. 
-           See the function \code{\link{TML.censored.control.S}} for the default values.}                                     
-  \item{control.ref}{ A list of control parameters for the refinement algorithm of the initial S estimates. 
-           See the function \code{\link{TML.censored.control.ref}} for the default values.}
-  \item{control.tml}{ AA list of control parameters for the computation of the final estimates.
-           See the function \code{\link{TML.censored.control.tml}} for the default values. }
+         The default is 2.5 in the Gaussian case and 1.855356 in the log-Weibull case. } 
+  \item{control.S}{ A list of control parameters for the computation of the initial S 
+         estimates. 
+         See the function \code{\link{TML.censored.control.S}} for the default values.}                                     
+  \item{control.ref}{ A list of control parameters for the refinement algorithm of the 
+         initial S estimates. 
+         See the function \code{\link{TML.censored.control.ref}} for the default values.}
+  \item{control.tml}{ AA list of control parameters for the computation of the final 
+         estimates.
+         See the function \code{\link{TML.censored.control.tml}} for the default values.}
 }
 
 \value{
   
   \code{TML.censored} returns an object of class "TML". 
-  The function \code{\link[base]{summary}} can be used to obtain or print a summary of the results. 
-  The generic extractor functions \code{\link[stats]{fitted}}, \code{\link[stats]{residuals}} and 
-  \code{\link[stats]{weights}} can be used to extract various elements of the object returned 
-  by \code{TML.censored}. The function \code{\link[stats]{update}} can be used to update the model.
+  The function \code{\link[base]{summary}} can be used to obtain or print a summary of 
+  the results. The generic extractor functions \code{\link[stats]{fitted}}, 
+  \code{\link[stats]{residuals}} and \code{\link[stats]{weights}} can be used to extract 
+  various elements of the object returned by \code{TML.censored}. The function 
+  \code{\link[stats]{update}} can be used to update the model.
 
   An object of class "TML" is a list with at least the following components: 
   \item{th0 }{Initial coefficient estimates.}
   \item{v0 }{Initial scale estimate.}
-  \item{nit.ref }{Reached number of iteration in the refinement step for the initial estimates.}
+  \item{nit.ref }{Reached number of iteration in the refinement step for the initial
+     estimates.}
   \item{th1 }{Final coefficient estimates.}
   \item{v1 }{Final scale estimate.}
   \item{nit.tml }{Number of iterations reached in IRLS algorithm for the final estimates.}
   \item{tu,tl }{Final cut-off values.}
   \item{alpha }{Estimated proportion of retained observations.}
   \item{tn }{Number of retained observations.}
-  \item{weights }{Vector of weights (0 for rejected observations, 1 for retained observations).}
-  \item{COV }{Covariance matrix of the final estimates (th1[1],...,th1[p],v1) (where p=ncol(X)).}
-  \item{residuals }{ Residuals of noncensored observations are calculated as response minus fitted values. 
-        For censored observations, the the expected residuals given that 
-        the response is larger than the recorded censored value are provided.}
+  \item{weights }{Vector of weights (0 for rejected observations, 1 for retained 
+      observations).}
+  \item{COV }{Covariance matrix of the final estimates (th1[1],...,th1[p],v1) 
+      (where p=ncol(X)).}
+  \item{residuals }{ Residuals of noncensored observations are calculated as response 
+      minus fitted values.  For censored observations, the the expected residuals given 
+      that the response is larger than the recorded censored value are provided.}
   \item{fitted.values }{The fitted mean values.}
   \item{call }{The matched call.}
   \item{formula }{The formula supplied.}
@@ -96,10 +105,11 @@ TML.censored(formula, delta, data, errors = "Gaussian",  initial = "S",
      # The estimates are slighty different than those of the paper due to changes 
      # in the algorithm for the final estimate.
      #
+     \dontrun{
      data(MCI)
-     attach(MCI)
-     
+     attach(MCI)     
      # Exploratory Analysis
+
      plot(Age,log(LOS),type= "n",cex=0.7)
 
      # (1) filled square : regular,   complete
@@ -117,10 +127,10 @@ TML.censored(formula, delta, data, errors = "Gaussian",  initial = "S",
      summary(ML)
      B.ML <- ML$coef
      S.ML <- ML$scale
-     
+
      abline(c(B.ML[1]        ,B.ML[3]        ),lwd=1,col="grey",lty=1)
      abline(c(B.ML[1]+B.ML[2],B.ML[3]+B.ML[4]),lwd=1,col="grey",lty=1)
-     
+   
      # Robust Accelerated Failure Time Regression with Gaussian errors
      ctrol.S   <- list(N=150, q=5, sigma0=1, MAXIT=100, TOL=0.001,seed=123)
 
@@ -136,6 +146,8 @@ TML.censored(formula, delta, data, errors = "Gaussian",  initial = "S",
      summary(WML)
      
      B.WML<-coef(WML)
+
      abline(c(B.WML[1]         ,B.WML[3]         ),lty=1, col="red")
      abline(c(B.WML[1]+B.WML[2],B.WML[3]+B.WML[4]),lty=1, col="red")
+}
 }

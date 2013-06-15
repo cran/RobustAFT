@@ -1,4 +1,3 @@
-ezez <- function(z)
-{
-  exp(z-exp(z))
-}
+ezez <-
+function(z){exp(z-exp(z))}
+
