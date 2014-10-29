@@ -1,4 +1,4 @@
-"comval2" <-
+"comval" <-
 function() {
         ipsi <- integer(1)
         c <- single(1)
@@ -24,7 +24,7 @@ function() {
         enu <- single(1)
         v7 <- single(1)
         iwww <- integer(1)
-        f.res <- .Fortran("comval2",
+        f.res <- .Fortran("comval",
                 ipsi = as.integer(ipsi),
                 c = as.single(c),
                 h1 = as.single(h1),

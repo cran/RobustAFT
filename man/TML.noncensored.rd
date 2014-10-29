@@ -6,8 +6,7 @@
 \description{
       This function computes the truncated maximum likelihood regression estimate
       described in Marazzi and Yohai (2004). 
-      The error distribution is assumed to follow approximately a Gaussian or a 
-      log-Weibull distribution. 
+      The error distribution is assumed to follow approximately a Gaussian or a log-Weibull distribution. 
       The cut-off values for outlier rejection are fixed or adaptive.
 }
 
@@ -17,17 +16,17 @@ TML.noncensored(formula, data, errors = "Gaussian", cu = NULL,
                 input = NULL, control = list(), ...)}
 
 \arguments{
-  \item{formula}{ A \code{\link[stats]{formula}}, i.e., a symbolic description of the 
-       model to be fit (cf. \code{\link[stats]{glm}} or \code{\link[stats]{lm}}). }
+  \item{formula}{ A \code{\link[stats]{formula}}, i.e., a symbolic description of the model
+              to be fit (cf. \code{\link[stats]{glm}} or \code{\link[stats]{lm}}). }
   \item{data}{ An optional data frame containing the variables in the model. If not
-       found in \code{data}, the variables are taken from \code{environment(formula)},
-       typically the environment from which \code{TML.noncensored} is called. }
+              found in \code{data}, the variables are taken from \code{environment(formula)},
+              typically the environment from which \code{TML.noncensored} is called. }
   \item{errors}{
       \itemize{
         \item "Gaussian": the error distribution is assumed to be Gaussian.
-        \item "log-Weibull" : the error distribution is assumed to be log-Weibull. }}
+        \item "logWeibull" : the error distribution is assumed to be log-Weibull. }}
   \item{cu}{ Preliminary minimal upper cut-off. 
-        The default is 2.5 in the Gaussian case and 1.855356 in the log-Weibull case. }
+             The default is 2.5 in the Gaussian case and 1.855356 in the log-Weibull case. }
   \item{initial}{
       \itemize{
         \item "S"     : initial S-estimate.
@@ -38,8 +37,7 @@ TML.noncensored(formula, data, errors = "Gaussian", cu = NULL,
         \item "fixed"   : non adaptive cut-off.}}
   \item{cov}{
       \itemize{
-      \item "no": no estimate of the covariance matrix of the coefficients is provided
-        on output.
+      \item "no": no estimate of the covariance matrix of the coefficients is provided on output.
       \item "parametric": a parametric estimate of the covariance matrix of the
                     coefficients is provided (to be used when n is small).
       \item "nonparametric": a nonparametric estimate of the covariance
@@ -48,31 +46,25 @@ TML.noncensored(formula, data, errors = "Gaussian", cu = NULL,
       Initial input estimates of location and scale.\cr 
       Required when initial="input". 
       \itemize{
-      \item "Gaussian case"   : list(theta=...,sigma=...) initial input estimates. theta: 
-        location; sigma: scale.
-      \item "log-Weibull case" : list(tau=...,v=...) initial input estimates of location 
-        (tau) and scale (v).}}
+      \item "Gaussian case"   : list(theta=...,sigma=...) initial input estimates. theta: location; sigma: scale.
+      \item "logWeibull case" : list(tau=...,v=...) initial input estimates of location (tau) and scale (v).}}
 
-  \item{control}{ Control parameters. For the default values, see the function 
-      \code{\link{TML.noncensored.control}}.}
-  \item{\dots}{ If fastS=TRUE, parameters for \code{lmrob.S}. See the function 
-       \code{\link[robustbase]{lmrob.control}}
+  \item{control}{ Control parameters. For the default values, see the function \code{\link{TML.noncensored.control}}.}
+  \item{\dots}{ If fastS=TRUE, parameters for \code{lmrob.S}. See the function \code{\link[robustbase]{lmrob.control}}
                 (from the robustbase package) for the default values. }
 }
 
 \value{ 
   \code{TML.noncensored} returns an object of class "TML". 
-  The function \code{\link[base]{summary}} can be used to obtain or print a summary of 
-  the results.  The generic extractor functions \code{\link[stats]{fitted}}, 
-  \code{\link[stats]{residuals}} and \code{\link[stats]{weights}} can be used to extract 
-  various elements of the value returned by \code{TML.noncensored}. The function 
-  code{\link[stats]{update}} can be used to update the model.
+  The function \code{\link[base]{summary}} can be used to obtain or print a summary of the results. 
+  The generic extractor functions \code{\link[stats]{fitted}}, \code{\link[stats]{residuals}} and 
+  \code{\link[stats]{weights}} can be used to extract various elements of the value returned 
+  by \code{TML.noncensored}. The function \code{\link[stats]{update}} can be used to update the model.
 
   An object of class "TML" is a list with the following components: 
   \item{th0 }{Initial coefficient estimates (S or input).}
   \item{v0 }{Initial scale (S or input).}
-  \item{nit0 }{Reached number of iteration in \code{lmrob.S} (available only if fastS is 
-    TRUE).}
+  \item{nit0 }{Reached number of iteration in \code{lmrob.S} (available only if fastS is TRUE).}
   \item{th1 }{Final coefficient estimates.}
   \item{v1 }{Final scale (S or input).}
   \item{nit1 }{Number of iterations reached by the IRLS algorithm for the final estimates.}
@@ -90,8 +82,8 @@ TML.noncensored(formula, data, errors = "Gaussian", cu = NULL,
   \item{data }{The \code{data argument}.}}
 
 \references{
-  Marazzi A., Yohai V. (2004). Adaptively truncated maximum likelihood regression with 
-   asymmetric errors. \emph{Journal of Statistical Planning and Inference}, 122, 271-291.
+  Marazzi A., Yohai V. (2004). Adaptively truncated maximum likelihood regression with asymmetric errors.
+  \emph{Journal of Statistical Planning and Inference}, 122, 271-291.
 }
 
 \seealso{ \code{\link{TML.noncensored.control}},
@@ -101,8 +93,11 @@ TML.noncensored(formula, data, errors = "Gaussian", cu = NULL,
 
 \keyword{ Regression }
 \keyword{ Robust}
+\keyword{ Accelerated Failure Time}
 
 \examples{
+
+\dontrun{
      data(D243)
      Cost <- D243$Cost                             # Cost (Swiss francs)
      LOS  <- D243$LOS                              # Length of stay (days)
@@ -116,7 +111,7 @@ TML.noncensored(formula, data, errors = "Gaussian", cu = NULL,
      Sex  <- D243$Sexe;   Sex <- (Sex=="M"   )*1   # Sex (1=Male, 0=Female)
 
      # Truncated maximum likelihood regression with Gaussian errors
- \dontrun{    
+
      z    <- TML.noncensored(log(Cost)~log(LOS)+Adm+Ass+Age+Dst+Sex,
               otp="adaptive",control=list(fastS=TRUE))
 
@@ -125,7 +120,7 @@ TML.noncensored(formula, data, errors = "Gaussian", cu = NULL,
      # Truncated maximum likelihood regression with log-Weibull errors
 
      w    <- TML.noncensored(log(Cost)~log(LOS)+Adm+Ass+Age+Dst+Sex,
-             errors="log-Weibull",otp="adaptive",control=list(fastS=TRUE))
+             errors="logWeibull",otp="adaptive",control=list(fastS=TRUE))
 
      summary(w)
 }

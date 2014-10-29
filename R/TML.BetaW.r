@@ -1,6 +1,6 @@
 TML.BetaW <- function(X,y,delta,Beta,sigma,Beta.t,sigma.t,cl,cu,maxit,tol,nitmon)
 {
-# iteratively reweighting algorithm for Beta in TML log-Weibull
+# iteratively reweighting algorithm for Beta in TML log Weibull
 p <- length(Beta); n <- length(y); nu <- sum(delta); nc <- n-nu; zero <- 1e-6
 nit <- 1; Beta1 <- rep(100,p)
 indu <- (1:n)[delta==1]; indc <- (1:n)[delta==0]

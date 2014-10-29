@@ -1,6 +1,6 @@
 BtamatW <-
 function(X,y,delta,N,q,MAXIT,TOL,seed=153)     {            
-# Function for determining the matrix of betas; log-Weibull case
+# Function for determining the matrix of betas; LogWeibull case
 n  <- length(y); p <- ncol(X); if (q < p) q <- p
 set.seed(seed)
 indu  <- (1:n)[delta==1]

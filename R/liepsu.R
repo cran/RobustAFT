@@ -1,5 +1,5 @@
 "liepsu" <-
-function(expsi=psi,upper=.dfvGet()$upr,til=.dfvGet()$tli) {
+function(expsi=psi,upper=.dFvGet()$upr,til=.dFvGet()$tli) {
 errest <- single(1)
 epsi2 <- single(1)
 epsip <- single(1)

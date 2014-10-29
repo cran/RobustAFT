@@ -1,7 +1,7 @@
 TML.noncensored<-function(formula, data, errors = "Gaussian", cu = NULL, initial = "S",
   otp = "fixed", cov = "parametric", input = NULL, control = list(), ...)
 {
-	if(!(errors %in% c("Gaussian", "log-Weibull")))
+	if(!(errors %in% c("Gaussian", "logWeibull")))
 		stop(gettextf("Errors distribution should be Gaussian or log-Weibull"))
 	if(!(initial %in% c("S", "input")))
     stop(gettextf("initial should be S or input"))
@@ -115,7 +115,7 @@ TML.noncensored<-function(formula, data, errors = "Gaussian", cu = NULL, initial
 			res <- c(res, list(COV = K$CV1))
 		}
 	}
-	if(errors == "log-Weibull"){
+	if(errors == "logWeibull"){
 		if(is.null(cu))
 			cu <- 1.855356
 		cl <- Izero(cu)

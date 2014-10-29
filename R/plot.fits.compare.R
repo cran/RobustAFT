@@ -68,7 +68,7 @@ plot.fits.compare <- function (x, xplots = FALSE, ask = TRUE, which = 1:4, leg.p
         den[[i]] <- density(residuals(x[[i]]))
         denmax <- max(denmax, den[[i]]$y)
         denmin <- min(denmin, den[[i]]$y)
-        if (xx == "TML" && x[[i]]$call$errors == "log-Weibull") 
+        if (xx == "TML" && x[[i]]$call$errors == "logWeibull") 
             q[[i]] <- log(qweibull(ppoints(length(r[[i]])), shape = 1))
         else q[[i]] <- qnorm(ppoints(length(r[[i]])))
         y[[i]] <- f[[i]] + r[[i]]

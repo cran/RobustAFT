@@ -7,7 +7,7 @@ X <- as.matrix(X); n <- length(y); p <- ncol(X); b <- 0.5
 zbet  <- BtamatW(X,y,delta,N,q,MAXIT,TOL,seed=seed) 
 beta  <- zbet$beta
 iok      <- (1:N)[!is.na(beta[,1])]
-beta     <- beta[iok,]
+beta     <- beta[iok,,drop=FALSE]
 N        <- length(iok)
 gamok <- 0
 s0    <- 1; c0 <- -0.1351788

@@ -1,5 +1,5 @@
 
-.dfvGet <- function()
+.dFvGet <- function()
 {
    f.res <- .Fortran("zdfvals",io=to.integer(0),dfv=single(66))
    z <- f.res$dfv
@@ -14,13 +14,13 @@
   as.list(z)
 }
 
-.dfvSet <- function(def)
+.dFvSet <- function(def)
 {
   f.res <- .Fortran("zdfvals",io=to.integer(1),dfv=to.single(def))
   return()
 }
 
-.dfvPut <- function(vals,nams)
+.dFvPut <- function(vals,nams)
 {
   alldef <-  c(
      "tlo", "gma", "mxs", "mxt", "ntm", "tua", "tlu", "iop", "ix1", "iy1",
@@ -41,7 +41,7 @@
   return()
 }
 
-".dfvals" <- function() {
+"dfvals" <- function() {
   f.res <- .Fortran("zdfvals",io=to.integer(-1),dfv=single(66))
   return()
 }

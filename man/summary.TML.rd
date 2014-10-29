@@ -8,11 +8,10 @@
 \title{Summarizing Truncated Maximum Likelihood regression }
 
 \description{
-      Summary and print \code{\link[utils]{methods}} for \code{R} object of class 
-      "TML" and \code{\link[base]{print}} method for the summary object.
-      Further, methods \code{\link[stats]{fitted}}(), \code{\link[stats]{residuals}}(), 
-      \code{\link[stats]{weights}}() or \code{\link[stats]{update}}() work (via the 
-      default methods), and \code{\link[stats]{coef}}(), \code{\link[stats]{vcov}}() 
+      Summary and print \code{\link[utils]{methods}} for \code{R} object of class "TML" and \code{\link[base]{print}} 
+      method for the summary object.
+      Further, methods \code{\link[stats]{fitted}}(), \code{\link[stats]{residuals}}(), \code{\link[stats]{weights}}() 
+      or \code{\link[stats]{update}}() work (via the default methods), and \code{\link[stats]{coef}}(), \code{\link[stats]{vcov}}() 
       have explicitly defined TML methods. }
 
 \usage{
@@ -26,14 +25,11 @@
 }
 
 \arguments{
-  \item{object}{ An object of class "TML", usually, a result of a call to 
-      \code{\link{TML.noncensored}} or \code{\link{TML.censored}}. }
+  \item{object}{ An object of class "TML", usually, a result of a call to \code{\link{TML.noncensored}} or \code{\link{TML.censored}}. }
   \item{\dots}{ Potentially more arguments passed to methods.}
-  \item{digits}{ Number of digits for printing, see \code{digits} in 
-       \code{\link[base]{options}}.}
+  \item{digits}{ Number of digits for printing, see \code{digits} in \code{\link[base]{options}}.}
   \item{x}{ An object of class "TML" or "summary.TML". }
-  \item{signif.stars}{ Logical indicating if the P-values should be visualized by so 
-       called "significance stars". }
+  \item{signif.stars}{ Logical indicating if the P-values should be visualized by so called "significance stars". }
 }
 
 \details{
@@ -41,13 +37,9 @@
        
       \code{print.TML} returns a printed summary of object of class "TML".
       
-      \code{print.summary.TML} tries to be smart about formatting the coefficients, 
-         standard errors, etc, and gives "significance stars" if signif.stars is TRUE 
-         (as per default when \code{\link[base]{options}} where not changed).
+      \code{print.summary.TML} tries to be smart about formatting the coefficients, standard errors, etc, and gives "significance stars" if signif.stars is TRUE (as per default when \code{\link[base]{options}} where not changed).
       
-      \code{coef.TML} returns the final coefficient estimates (value \code{th1} of a 
-          "TML" object), and \code{vcov.TML} returns the covariance matrix of the final 
-          estimates (value \code{CV1} of a "TML" object).
+      \code{coef.TML} returns the final coefficient estimates (value \code{th1} of a "TML" object), and \code{vcov.TML} returns the covariance matrix of the final estimates (value \code{CV1} of a "TML" object).
 }
 \value{          
   An object of class "summary.TML" is a list with the following components:
@@ -57,19 +49,16 @@
   \item{residuals }{The component from \code{object}.}
   \item{fitted.values }{The component from \code{object}.}
   \item{tn }{The component from \code{object}.}
-  \item{coefficients }{The matrix of coefficients, standard errors, t-values and p-values. 
-      Aliased coefficients are omitted.}
+  \item{coefficients }{The matrix of coefficients, standard errors, t-values and p-values. Aliased coefficients are omitted.}
   \item{aliased }{Named logical vector showing if the original coefficients are aliased.}
-  \item{df }{Degrees of freedom, a 3-vector (p, n-p, p*), the last being the number of 
-      non-aliased coefficients.} 
+  \item{df }{Degrees of freedom, a 3-vector (p, n-p, p*), the last being the number of non-aliased coefficients.} 
   \item{sigma }{The final scale estimate from \code{object}.}
-  \item{cutoff.values }{A vector of the final lower and upper cut-off values from 
-      \code{object}.}
+  \item{cutoff.values }{A vector of the final lower and upper cut-off values from \code{object}.}
 }
-\seealso{ \code{\link{TML.noncensored}}, \code{\link{TML.censored}}, 
-      \code{\link[base]{summary}}, \code{\link[base]{print}}
+\seealso{ \code{\link{TML.noncensored}}, \code{\link{TML.censored}}, \code{\link[base]{summary}}, \code{\link[base]{print}}
 }
 \examples{
+\dontrun{
      data(D243)
      Cost <- D243$Cost                             # Cost (Swiss francs)
      LOS  <- D243$LOS                              # Length of stay (days)
@@ -91,4 +80,5 @@
      sumz               # -> print.summary.TML(....)
      coef(z)            # -> coef.TML(....)
      vcov(z)            # -> vcov.TML(....)
+}
 }

@@ -1,7 +1,7 @@
 TML.censored<-function(formula, delta, data, errors = "Gaussian", initial = "S",  input = NULL, 
               otp = "fixed",  cov=TRUE, cu = NULL, control.S=list(), control.ref=list(), control.tml=list())
 {
-  if(!(errors %in% c("Gaussian", "log-Weibull")))
+  if(!(errors %in% c("Gaussian", "logWeibull")))
 		stop(gettextf("Errors distribution should be Gaussian or log-Weibull"))
   if(!(initial %in% c("S", "input")))
                 stop(gettextf("initial should be S or input"))
@@ -43,20 +43,16 @@ TML.censored<-function(formula, delta, data, errors = "Gaussian", initial = "S",
       zS  <- SparamG.S(X,y,delta,N,q,sigma0,MAXIT,TOL,ialg=3,seed)
       b.SP <- zS$Bmin
       s.SP <- zS$Smin
+	  zR <- RefSG(X, y, delta, b.SP, s.SP, control.ref)
       nit0 <- 0 }
 
     if (initial == "input") {
       z <- input
       b.SP <- z$theta
       s.SP <- z$sigma
+	  zR <- list(Bmin=b.SP, Smin=s.SP)
       nit0 <- 0 }
 
-     
-    
-    # Refinement
-
-    
-    zR <- RefSG(X,y,delta,b.SP,s.SP,control.ref)
     B.SP <- zR$Bmin
     S.SP <- zR$Smin 
     nit.ref <- zR$Nit
@@ -117,25 +113,23 @@ TML.censored<-function(formula, delta, data, errors = "Gaussian", initial = "S",
   }
   
   # Log-Weibull errors
-  if(errors == "log-Weibull"){
+  if(errors == "logWeibull"){
   
     if (initial == "S") {   
       # Parametric S
       zS  <- SparamW.S(X,y,delta,N,q,sigma0,MAXIT,TOL,ialg=3,seed)
       b.SP <- zS$Bmin
       s.SP <- zS$Smin 
+	  zR <- RefSW(X,y,delta,b.SP,s.SP,control.ref)
       nit0 <- 0}
 
     if (initial == "input") {
       z <- input
       b.SP <- z$tau
       s.SP <- z$v
+	  zR <- list(Bmin=b.SP, Smin=s.SP)
       nit0 <- 0 }
 
-    
-    # Refinement
-
-    zR <- RefSW(X,y,delta,b.SP,s.SP,control.ref)
     B.SP <- zR$Bmin
     S.SP <- zR$Smin
 

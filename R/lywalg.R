@@ -1,7 +1,7 @@
 "lywalg" <-
 function(y,lambda,psp0=psp(0),expsi=psi,exchi=chi,exrho=rho,
- sigmai,tol=.dfvGet()$tlo,gam=.dfvGet()$gma,isigma=.dfvGet()$isg,maxit=.dfvGet()$mxt,
- maxis=.dfvGet()$mxs,nitmon=.dfvGet()$ntm) {
+ sigmai,tol=.dFvGet()$tlo,gam=.dFvGet()$gma,isigma=.dFvGet()$isg,maxit=.dFvGet()$mxt,
+ maxis=.dFvGet()$mxs,nitmon=.dFvGet()$ntm) {
  if (missing(y)) messagena("y")
  if (missing(lambda)) lambda <- median(y)
  if (missing(sigmai)) messagena("sigmai")

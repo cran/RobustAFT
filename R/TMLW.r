@@ -1,6 +1,6 @@
 TMLW <-
 function(X,y,delta,Beta.t,sigma.t,const,tl,tu,control) {
-# TML, log-Weibull case, iteratively reweighting algorithm
+# TML, logWeibull case, iteratively reweighting algorithm
 maxit.sigma   <- control$maxit.sigma
 tol.sigma     <- control$tol.sigma
 maxit.Beta    <- control$maxit.Beta

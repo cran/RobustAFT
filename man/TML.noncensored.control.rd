@@ -6,8 +6,8 @@
 
 \description{
       Control parameters for \code{\link{TML.noncensored}}. 
-      Typically only used internally by \code{TML.noncensored}, but may be used to 
-      construct a control argument. This function provides default values.
+      Typically only used internally by \code{TML.noncensored}, but may be used to construct a control argument.
+      This function provides default values.
 }
 \usage{
 TML.noncensored.control(iv = 1, nrep = 0, gam = 0.1, nitmon = FALSE, 
@@ -23,21 +23,17 @@ TML.noncensored.control(iv = 1, nrep = 0, gam = 0.1, nitmon = FALSE,
       \itemize{
       \item Number of subsamples to be used in the computation of the S-estimate.
       \item 0: exhaustive sampling if the observation number is not too large.}}
-  \item{gam}{ Relaxation factor for the IRLS algorithm of final estimate. 
-       Set 0 < gam <= 1.}
-  \item{nitmon}{ Set to TRUE if iteration monitoring in IRLS algorithm for the final 
-       estimate is desired. Default=FALSE. }
+  \item{gam}{ Relaxation factor for the IRLS algorithm of final estimate. Set 0 < gam <= 1.}
+  \item{nitmon}{ Set to TRUE if iteration monitoring in IRLS algorithm for the final estimate is desired. Default=FALSE. }
   \item{maxit}{ Maximum number of iterations in IRLS algorithm for the final estimate. }
   \item{tol}{ Relative tolerance in IRLS algorithm. }
   \item{fastS}{
       \itemize{
-      \item "TRUE"  : the initial S-estimate is computed using 
-           \code{\link[robustbase]{lmrob.S}} from the \pkg{robustbase} package. 
-           The control parameters are taken from \code{lmrob.control}.
+      \item "TRUE"  : the initial S-estimate is computed using \code{\link[robustbase]{lmrob.S}} from the
+               \pkg{robustbase} package. The control parameters are taken from \code{lmrob.control}.
       \item "FALSE" : the initial S-estimate is computed using \code{hysest} from the
                 \pkg{robeth} package.}}
-  \item{seed}{ Seed for the random number generator in the resampling algorithm for 
-           the initial S-estimate. }
+  \item{seed}{ Seed for the random number generator in the resampling algorithm for the initial S-estimate. }
 }
 
 \value{
@@ -48,7 +44,7 @@ TML.noncensored.control(iv = 1, nrep = 0, gam = 0.1, nitmon = FALSE,
 \examples{
      ### In the example(TML.noncensored), the control argument can be built 
      ### using this function:
-
+\dontrun{
      data(D243)
      Cost <- D243$Cost                             # Cost (Swiss francs)
      LOS  <- D243$LOS                              # Length of stay (days)
@@ -66,4 +62,5 @@ TML.noncensored.control(iv = 1, nrep = 0, gam = 0.1, nitmon = FALSE,
      ctrol <- TML.noncensored.control(iv=1, nrep=0, gam=0.2, fastS=TRUE, nitmon=FALSE)
      z     <- TML.noncensored(log(Cost)~log(LOS)+Adm+Ass+Age+Dst+Sex, otp="adaptive")
      summary(z)
+}
 }

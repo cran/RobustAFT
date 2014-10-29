@@ -6,7 +6,7 @@
 \description{
       Auxiliary function for \code{\link{TML.censored}}. 
       Typically only used internally by \code{TML.censored}, but may be used to provide
-      a control argument. This function provides default values.}
+  	  a control argument. This function provides default values.}
 
 \usage{
 TML.censored.control.tml(maxit.sigma=20, tol.sigma=0.0001, maxit.Beta=20, 
@@ -36,7 +36,9 @@ TML.censored.control.tml(maxit.sigma=20, tol.sigma=0.0001, maxit.Beta=20,
 
 \examples{
      ### In the example(TML.censored), the control argument for the final estimates 
-     ### can be built using this function:
+	 ### can be built using this function:
+	 
+	 \dontrun{
      data(MCI)
      attach(MCI)
      
@@ -47,7 +49,7 @@ TML.censored.control.tml(maxit.sigma=20, tol.sigma=0.0001, maxit.Beta=20,
      ctrol.tml <- TML.censored.control.tml(maxit.sigma=50,tol.sigma=0.0001,
            maxit.Beta=50,tol.Beta=0.0001, Maxit.TML=50, tol.TML.sigma=0.001, 
            tol.TML.Beta=0.001, alg.sigma=1,nitmon=FALSE)
- \dontrun{    
+     
      WML   <- TML.censored(log(LOS)~TypAdm*Age,data=MCI,delta=Dest,otp="adaptive",
            control.ref=ctrol.ref,control.tml=ctrol.tml)
 

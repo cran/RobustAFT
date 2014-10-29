@@ -1,7 +1,7 @@
 "hysest" <-
-function(x,y,nq=np,iopt=.dfvGet()$ipt,intch=.dfvGet()$ich,nrep,tols=.dfvGet()$tls,
-tolr=.dfvGet()$tlr,tau=.dfvGet()$tua,gam=.dfvGet()$gma,maxit=.dfvGet()$mxt,maxs1=.dfvGet()$msx,
-maxs2=.dfvGet()$mxs,expsi=psi,expsp=psp,exchi=chi,iseed=.dfvGet()$isd) {
+function(x,y,nq=np,iopt=.dFvGet()$ipt,intch=.dFvGet()$ich,nrep,tols=.dFvGet()$tls,
+tolr=.dFvGet()$tlr,tau=.dFvGet()$tua,gam=.dFvGet()$gma,maxit=.dFvGet()$mxt,maxs1=.dFvGet()$msx,
+maxs2=.dFvGet()$mxs,expsi=psi,expsp=psp,exchi=chi,iseed=.dFvGet()$isd) {
 if (missing(x)) messagena("x")
 if (missing(y)) messagena("y")
 n <- length(y)

@@ -1,18 +1,18 @@
 "invM2.n" <-
 function(u,theta,sigma,rs,wi,XtX,xbar,estim=c("SA","TMLA","SI","TMLI")) {
 n <- length(rs); p <- ncol(XtX); xk <- 1.5477
-if (estim=="SA")  {zpsp <- RobustAFT:::psp.weight(rs,ips=2,xk=xk)
+if (estim=="SA")  {zpsp <- psp.weight(rs,ips=2,xk=xk)
                    a1c  <- sum(zpsp)/(n*sigma)
                    b1c  <- sum(zpsp*rs)/(n*sigma)
-                   zpsi <- RobustAFT:::psi.weight(rs,ips=2,xk=xk)
+                   zpsi <- psi.weight(rs,ips=2,xk=xk)
                    a2c  <- sum(zpsi)/(n*sigma)
                    b2c  <- sum(zpsi*rs)/(n*sigma)}
 if (estim=="TMLA"){a1c  <- sum(wi)/(n*sigma)
                    b1c  <- sum(rs*wi)/(n*sigma)
                    a2c  <- 2*b1c
                    b2c  <- 2*sum(rs^2*wi)/(n*sigma)}
-if (estim=="SI")  {a1c   <- integrate(RobustAFT:::Pspphi.n, lower=-xk,upper=xk)$value/sigma
-                   b2c   <- integrate(RobustAFT:::Psizphi.n,lower=-xk,upper=xk)$value/sigma
+if (estim=="SI")  {a1c   <- integrate(Pspphi.n, lower=-xk,upper=xk)$value/sigma
+                   b2c   <- integrate(Psizphi.n,lower=-xk,upper=xk)$value/sigma
                    a2c   <- 0; b1c <- 0}
 if (estim=="TMLI"){a1c   <- (2*pnorm(u)-1)/sigma
                    b2c   <- 4*(-u*dnorm(u)+pnorm(u)-0.5)/sigma

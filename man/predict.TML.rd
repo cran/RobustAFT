@@ -11,29 +11,26 @@
 \method{predict}{TML}(object, newdata = NULL, ...)}
 
 \arguments{
-  \item{object}{ An object of class "TML", usually, a result of a call to 
-        \code{\link{TML.noncensored}} or \code{\link{TML.censored}}. }
-  \item{newdata}{ Optionally, a vector, a matrix or a data frame containing the variables 
-         with which to predict. 
+  \item{object}{ An object of class "TML", usually, a result of a call to \code{\link{TML.noncensored}} or \code{\link{TML.censored}}. }
+  \item{newdata}{ Optionally, a vector, a matrix or a data frame containing the variables with which to predict. 
                   If omitted, the fitted values of \code{object} are returned.}
   \item{\dots}{ Additional arguments affecting the predictions produced.}
 }
 
 \details{
-      \code{newdata} must have the same number of variables (that is of columns) as the 
-      model. If \code{object} is a model with an intercept, \code{newdata} must have a 
-      first column of 1.
+      \code{newdata} must have the same number of variables (that is of columns) as the model.
+      If \code{object} is a model with an intercept, \code{newdata} must have a first column of 1.
 }
 
 \value{
   Returns a vector of predictions.
 }
 
-\seealso{ \code{\link{TML.noncensored}}, \code{\link{TML.censored}}, 
-          \code{\link[stats]{predict}}
+\seealso{ \code{\link{TML.noncensored}}, \code{\link{TML.censored}}, \code{\link[stats]{predict}}
 }
 
 \examples{
+\dontrun{
      data(D243)
      Cost <- D243$Cost                             # Cost (Swiss francs)
      LOS  <- D243$LOS                              # Length of stay (days)
@@ -41,7 +38,7 @@
                                                    # (0=on notification, 1=Emergency)
 
      # Fitting the model
-     z    <- TML.noncensored(log(Cost)~log(LOS)+Adm, errors="log-Weibull")
+     z    <- TML.noncensored(log(Cost)~log(LOS)+Adm, errors="logWeibull")
 
      # With a vector of data
      vec  <- c(1, 2.4, 1)
@@ -54,3 +51,5 @@
              "Adm"=c(1,0,1)))
      predict(z, dat)
 }
+}
+

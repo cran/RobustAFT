@@ -21,7 +21,7 @@ plot.TML<-function(x, which = 1:3, caption = c("Residual QQ-plot",
     if(show[1]){
         if(x$errors == "Gaussian")
             qw <- qnorm(ppoints(sr))
-        if(x$errors == "log-Weibull")
+        if(x$errors == "logWeibull")
             qw <- log(qweibull(ppoints(sr), shape = 1))
         plot(qw, sort(sr),ylim=c(-(max(abs(min(sr)),max(sr))+0.5),max(abs(min(sr)),max(sr))+0.5),
              xlab = "Theoretical Quantiles", ylab = "Standardized Residuals")

@@ -7,10 +7,9 @@ Robust Accelerated Failure Time Model Fitting
 \description{
 This package computes the truncated maximum likelihood regression estimates
 described in Marazzi and Yohai (2004) and Locatelli et al. (2010). 
-The error distribution is assumed to follow approximately a Gaussian or a log-Weibull 
-distribution.  The cut-off values for outlier rejection are fixed or adaptive.
-The main functions of this package are \code{\link{TML.noncensored}} and 
-\code{\link{TML.censored}}.
+The error distribution is assumed to follow approximately a Gaussian or a log-Weibull distribution. 
+The cut-off values for outlier rejection are fixed or adaptive.
+The main functions of this package are \code{\link{TML.noncensored}} and \code{\link{TML.censored}}.
 }
 \details{
 \tabular{ll}{
@@ -28,8 +27,7 @@ Alfio Marazzi <Alfio.Marazzi@chuv.ch>, Jean-Luc Muralti
 Maintainer: A. Randriamiharisoa <Alex.Randriamiharisoa@chuv.ch>
 }
 \references{
-  Marazzi A., Yohai V. (2004). Adaptively truncated maximum likelihood regression with 
-  asymmetric errors.
+  Marazzi A., Yohai V. (2004). Adaptively truncated maximum likelihood regression with asymmetric errors.
   \emph{Journal of Statistical Planning and Inference}, 122, 271-291.
 
   Locatelli I., Marazzi A., Yohai V. (2010). Robust accelerated failure time regression.
@@ -47,7 +45,7 @@ Maintainer: A. Randriamiharisoa <Alex.Randriamiharisoa@chuv.ch>
 # Example 1. This is the example described in Marazzi and Yohai (2004).
 # ---------
 # The two following auxiliary functions, not included in the library, 
-# must be loaded.
+#must be loaded.
 # ------------- Auxiliary functions -------------------------------------
 
 SDmux.lw <- function(x,theta,sigma,COV){
@@ -66,7 +64,6 @@ V.mu.x   <- t(x)\%*\%COV.TT\%*\%x + dg^2*Var.S + 2*dg*(t(x)\%*\%COV.TS)
 SD.mu.x  <- as.numeric((sqrt(V.mu.x))*mu.x)
 SD.mu.x}
 
-\dontrun{
 plt <- function(LOS,Cost,Adm,theta.fr,sigma.fr,sd0.fr,sd1.fr,theta.ml,
                 sigma.ml,sd0.ml,sd1.ml){
 # Plot of the conditional mean and confidence intervals: log-Weibull case
@@ -103,7 +100,6 @@ lines(l0,z1min,lty=2,col=1)
 lines(l0,z1max,lty=2,col=1)
 polygon(c(l0,rev(l0)), c(z0min,rev(z0max)), border=FALSE, density=10, angle=90)
 polygon(c(l0,rev(l0)), c(z1min,rev(z1max)), border=FALSE, density=12, angle=90,col=2)}
-}
 
 #------ End of auxiliary functions --------------------------------------------------
 
@@ -120,15 +116,14 @@ Dst <- D243$dest;   Dst <- (Dst=="DOMI")*1   # Destination (1=Home, 0=another ho
 Sex <- D243$Sexe;   Sex <- (Sex=="M"   )*1   # Sex (1=Male, 0=Female)
 
 # Plot data
+par(mfrow=c(1,2))
+plot(LOS,Cost); plot(log(LOS),log(Cost))
 \dontrun{
-  par(mfrow=c(1,2))
-  plot(LOS,Cost); plot(log(LOS),log(Cost))
-}
 # log-Weibull fits
 # ----------------
 # Full robust model
 zwff     <- TML.noncensored(log(Cost)~log(LOS)+Adm+Ass+Age+Sex+Dst,
-            errors="log-Weibull")
+            errors="logWeibull")
 summary(zwff)
 
 # Reduced model
@@ -136,48 +131,44 @@ zwfr     <- update(zwff,log(Cost)~log(LOS)+Adm)
 summary(zwfr)
 
 # Residual plots
-\dontrun{  
-  par(mfrow=c(1,2))
-  plot(zwfr,which=c(1,3))
+par(mfrow=c(1,2))
+plot(zwfr,which=c(1,3))
 
-  Plot robust predictions on log-log scale
-  par(mfrow=c(1,1))
-  l0       <- seq(from=2,to=60,by=0.5)
-  x0       <- as.matrix(cbind(1,log(l0),0))
-  x1       <- as.matrix(cbind(1,log(l0),1))
-  plot(log(LOS),log(Cost),type="n")
-  points(log(LOS[Adm==1]),log(Cost[Adm==1]),pch=16,col=2)
-  points(log(LOS[Adm==0]),log(Cost[Adm==0]),pch=1)
-  lines(log(l0),predict(zwfr,x0))
-  lines(log(l0),predict(zwfr,x1),col=2)
-}
+# Plot robust predictions on log-log scale
+par(mfrow=c(1,1))
+l0       <- seq(from=2,to=60,by=0.5)
+x0       <- as.matrix(cbind(1,log(l0),0))
+x1       <- as.matrix(cbind(1,log(l0),1))
+plot(log(LOS),log(Cost),type="n")
+points(log(LOS[Adm==1]),log(Cost[Adm==1]),pch=16,col=2)
+points(log(LOS[Adm==0]),log(Cost[Adm==0]),pch=1)
+lines(log(l0),predict(zwfr,x0))
+lines(log(l0),predict(zwfr,x1),col=2)
 
 # Maximum likelihood : full model
 zmlf     <- TML.noncensored(log(Cost)~log(LOS)+Adm+Ass+Age+Sex+Dst,
-            errors="log-Weibull",cu=100)
+            errors="logWeibull",cu=100)
 summary(zmlf)
 
 # Maximum likelihood : reduced model
 zmlr     <- update(zmlf,log(Cost)~log(LOS)+Adm)
 summary(zmlr)
 
-# Plot conditional means and confidence intervals  
-\dontrun{
-  l0       <- seq(from=2,to=62,by=0.5)
-  x0       <- as.matrix(cbind(1,log(l0),0))
-  x1       <- as.matrix(cbind(1,log(l0),1))
-  theta.fr <- coef(zwfr)
-  sigma.fr <- zwfr$v1
-  COV.fr   <- vcov(zwfr)
-  sd0.fr   <- apply(x0,1,SDmux.lw,theta.fr,sigma.fr,COV.fr)
-  sd1.fr   <- apply(x1,1,SDmux.lw,theta.fr,sigma.fr,COV.fr)
-  theta.ml <- coef(zmlr)
-  sigma.ml <- zmlr$v1
-  COV.ml   <- zmlr$COV
-  sd0.ml   <- apply(x0,1,SDmux.lw,theta.ml,sigma.ml,COV.ml)
-  sd1.ml   <- apply(x1,1,SDmux.lw,theta.ml,sigma.ml,COV.ml)
-  plt(LOS,Cost,Adm,theta.fr,sigma.fr,sd0.fr,sd1.fr,theta.ml,sigma.ml,sd0.ml,sd1.ml)
-}
+# Plot conditional means and confidence intervals
+l0       <- seq(from=2,to=62,by=0.5)
+x0       <- as.matrix(cbind(1,log(l0),0))
+x1       <- as.matrix(cbind(1,log(l0),1))
+theta.fr <- coef(zwfr)
+sigma.fr <- zwfr$v1
+COV.fr   <- vcov(zwfr)
+sd0.fr   <- apply(x0,1,SDmux.lw,theta.fr,sigma.fr,COV.fr)
+sd1.fr   <- apply(x1,1,SDmux.lw,theta.fr,sigma.fr,COV.fr)
+theta.ml <- coef(zmlr)
+sigma.ml <- zmlr$v1
+COV.ml   <- zmlr$COV
+sd0.ml   <- apply(x0,1,SDmux.lw,theta.ml,sigma.ml,COV.ml)
+sd1.ml   <- apply(x1,1,SDmux.lw,theta.ml,sigma.ml,COV.ml)
+plt(LOS,Cost,Adm,theta.fr,sigma.fr,sd0.fr,sd1.fr,theta.ml,sigma.ml,sd0.ml,sd1.ml)
 
 # Gaussian fits (for comparison)
 # ------------------------------
@@ -185,11 +176,9 @@ summary(zmlr)
 zgfr <- TML.noncensored(log(Cost)~log(LOS)+Adm,errors="Gaussian")
 summary(zgfr)
 
-# Residual plots  
-\dontrun{
-  par(mfrow=c(1,2))
-  plot(zgfr,which=c(1,3))
-}
+# Residual plots
+par(mfrow=c(1,2))
+plot(zgfr,which=c(1,3))
 
 # Classical Gaussian fit
 lr <- lm(log(Cost)~log(LOS)+Adm)
@@ -199,8 +188,7 @@ summary(lr)
 # --------------------
 comp <- fits.compare(TML.logWeibull=zwfr,ML.logWeibull=zmlr,least.squares=lr)
 comp
-\dontrun{
- plot(comp,leg.position=c("topleft","topleft","bottomleft")) # click on graphics
+plot(comp,leg.position=c("topleft","topleft","bottomleft")) # click on graphics
 }
 #
 #------------------------------------------------------------------------------
@@ -210,6 +198,7 @@ comp
 # This is the example described in Locatelli et al. (2010). 
 # The estimates are slighty different due to changes in the algorithm for the 
 # final estimate.
+\dontrun{
 # Remove data of Example 1
 rm(Cost,LOS,Adm,Ass,Age,Dst,Sex)
 
@@ -218,7 +207,6 @@ attach(MCI)
      
 # Exploratory Analysis
 
-\dontrun{
 par(mfrow=c(1,1)) 
 
 plot(Age,log(LOS),type= "n",cex=0.7)
@@ -232,13 +220,11 @@ points(Age[Dest==1 & TypAdm==0], log(LOS)[Dest==1 & TypAdm==0], pch=15,cex=0.7) 
 points(Age[Dest==0 & TypAdm==0], log(LOS)[Dest==0 & TypAdm==0], pch=0, cex=0.7)  # (2)
 points(Age[Dest==1 & TypAdm==1], log(LOS)[Dest==1 & TypAdm==1], pch=17,cex=0.7)  # (3)
 points(Age[Dest==0 & TypAdm==1], log(LOS)[Dest==0 & TypAdm==1], pch=2, cex=0.7)  # (4)
-}
+
 # Maximum Likelihood
 ML   <- survreg(Surv(log(LOS), Dest) ~ TypAdm*Age, dist="gaussian")
 summary(ML)
 B.ML <- ML$coef; S.ML <- ML$scale
-
-\dontrun{
 abline(c(B.ML[1]        ,B.ML[3]        ),lwd=1,col="grey",lty=1)
 abline(c(B.ML[1]+B.ML[2],B.ML[3]+B.ML[4]),lwd=1,col="grey",lty=1)
      
@@ -256,11 +242,10 @@ WML       <- TML.censored(log(LOS)~TypAdm*Age,data=MCI,delta=Dest,otp="adaptive"
 
 summary(WML)
 
-B.WML     <- coef(WML)
-
+B.WML     <-coef(WML)
 abline(c(B.WML[1]         ,B.WML[3]         ),lty=1, col="red")
 abline(c(B.WML[1]+B.WML[2],B.WML[3]+B.WML[4]),lty=1, col="red")
-}
+#
 detach(MCI)
-
+}
 }
