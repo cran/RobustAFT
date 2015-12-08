@@ -2,7 +2,14 @@ useDynLib(RobustAFT)
 import(stats)
 import(survival)
 importFrom(robustbase, lmrob.S, lmrob.control)
-importFrom(graphics, plot)
+importFrom("grDevices", "dev.interactive")
+importFrom("graphics", "plot","abline", "hist", "legend", "mtext", "par",
+             "points", "text", "title")
+importFrom("utils", "flush.console")
+
+
+### exported for the package robustloggamma
+export(S.eq.Gauss, TML.gauss, Nrm2, s.eq.Gauss)
 
 export(TML.noncensored,TML.noncensored.control, TML1.noncensored, TML1.noncensored.control,
         fits.compare, TML.censored, TML.censored.control.S, TML.censored.control.ref, TML.censored.control.tml)
@@ -33,11 +40,11 @@ export(TML.noncensored,TML.noncensored.control, TML1.noncensored, TML1.noncensor
 # export(BtamatG, BtamatW, CandidateG, CandidateW, Chidnorm, Chidlweibul,
 # 	 ChiSG, ChiSN, ChiSw, Cov.Gauss, Cov.LogW, CutoffN, CutoffW, CutofrN, 
 #	 dfcomn2, dlweibul, IChidlweibul, IChidnorm, intg0, intg0.TMLW, intg1.TMLW,
-#	 intg2, intg2.TMLW, intw0, intw1, intxlwbl, IPsidnorm, Nrm2, plweibul,
+#	 intg2, intg2.TMLW, intw0, intw1, intxlwbl, IPsidnorm, plweibul,
 #	 ps0, ps0W, ps1, ps1W, Psidnorm, PsiSG, PsiSN, PsiSw, psp0W, psp1W,
 #	 PspSG, PspSN, PspSw, QMatrix.G, QMatrix.W, RappN, RappW, RefAve2G,
 #	 RefAve2W, RefBetaG, RefBetaW, RefSG, RefSigmaG, RefSigmaW, RefSW,
-#	 regfal, ResExpG, ResExpW, s.eq.Gauss, s.eq.LogW, SparamG.S, SparamW.S, 
+#	 regfal, ResExpG, ResExpW, s.eq.LogW, SparamG.S, SparamW.S, 
 #	 TML.Ave2G, TML.Ave2W, TML.BetaG, TML.BetaW, TML.Gauss, TML.logweibull,
 #	 TML.SigmaG, TML.SigmaW, TMLeqn2W, TMLG, TMLW, TMLjac11.G, TMLjac21.G,
 #	 TMLjac12.G, TMLjac22.G, TMLjac11.W, TMLjac21.W, TMLjac12.W, TMLjac22.W,
