@@ -10,7 +10,7 @@ tint  <- 4-lint; if (lint==0) tint <- 0
 theta <- rs <- yy <- dd <- sz <- sw <- it <- rep(0,n)
 sx    <- matrix(0,nrow=n,ncol=p)
 sgama <- sbeta <- rep(0,p)
-dfcomn2(ipsi=ipsi,xk=xk)
+#dfcomn2(ipsi=ipsi,xk=xk)
 
 f.res <- .Fortran("sigama",
 x=to.single(X),y=to.single(y),delta=to.single(delta),sig=to.single(S.ini),
@@ -37,7 +37,7 @@ theta <- rs <- yy <- dd <- sz <- sw <- it <- rep(0,n)
 sx    <- matrix(0,nrow=n,ncol=p)
 sgama <- sbeta <- rep(0,p)
 gama  <- matrix(0,ncol=p,nrow=N)
-dfcomn2(ipsi=ipsi,xk=xk)
+#dfcomn2(ipsi=ipsi,xk=xk)
 
 f.res <- .Fortran("sigama",
 x=to.single(X),y=to.single(y),delta=to.single(delta),sig=to.single(S.ini),

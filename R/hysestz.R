@@ -1,7 +1,7 @@
-"hysest" <-
+"hysestz" <-
 function(x,y,nq=np,iopt=.dFvGet()$ipt,intch=.dFvGet()$ich,nrep,tols=.dFvGet()$tls,
 tolr=.dFvGet()$tlr,tau=.dFvGet()$tua,gam=.dFvGet()$gma,maxit=.dFvGet()$mxt,maxs1=.dFvGet()$msx,
-maxs2=.dFvGet()$mxs,expsi=psi,expsp=psp,exchi=chi,iseed=.dFvGet()$isd) {
+maxs2=.dFvGet()$mxs,expsi=psi,expsp=psp,exchi=chi,iseed=.dFvGet()$isd,ipsi=4,xk=1.54764,beta=0.5) {
 if (missing(x)) messagena("x")
 if (missing(y)) messagena("y")
 n <- length(y)
@@ -19,7 +19,10 @@ it1 <- integer(nq)
 cov <- single(ncov)
 work <- single(mdw)
 iwork <- integer(mdi)
-f.res <- .Fortran("int21",
+work[1] <- as.single(xk)
+work[2] <- as.single(beta)
+iwork[1] <- as.integer(ipsi)
+f.res <- .Fortran("intz21",
 x=to.single(x),
 y=to.single(y),
 n=to.integer(n),

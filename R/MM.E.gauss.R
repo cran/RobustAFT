@@ -1,9 +1,9 @@
 "MM.E.gauss" <-
 function(y, cov=FALSE, isigma=1, onlyS=FALSE, test=FALSE, level=0.90, control, ...){
-  call <- match.call(); n   <- length(y)
-  old <- comval();      tlo <- control$tlo; mxf <- control$mxf
-  mxs <- control$mxs;   ntm <- control$ntm; tls <- control$tls  
-  k0  <- control$k0;    k1  <- control$k1 ; h   <- control$h
+  call <- match.call(); n   <- length(y);  old <- comval()   
+  tlo <- control$tlo; mxf <- control$mxf
+  mxs <- control$mxs; ntm <- control$ntm; tls <- control$tls  
+  k0  <- control$k0;  k1  <- control$k1 ; h   <- control$h
   Beta<- control$Beta0 
   zc  <- list(...)
   if (length(zc) != 0) {

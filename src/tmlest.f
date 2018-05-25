@@ -113,9 +113,8 @@ C     1   .OR.LIMIT.GT.500)  CALL MESSGE(500,'INTGRD',1)
       RLIST=BLIST+LIMIT
       ELIST=RLIST+LIMIT
       CALL SRQAGE1T(F,FARR,N,FEXT,GEXT,A,B,EPSABS,EPSREL,KEY,LIMIT,
-     1     RESULT,ABSERR,NEVAL,IER,
-     2     WORK,WORK(BLIST),WORK(RLIST),WORK(ELIST),IWORK,LAST,
-     2	   NPR,PARAM)
+     1     RESULT,ABSERR,NEVAL,IER,WORK,WORK(BLIST),
+     2     WORK(RLIST),WORK(ELIST),IWORK,LAST,NPR,PARAM)
 C
       RETURN
       END
@@ -123,9 +122,8 @@ C
 C-----------------------------------------------------------------------
 C
       SUBROUTINE SRQAGE1T(F,FARR,N,FEXT,GEXT,A,B,EPSABS,EPSREL,KEY,
-     *  LIMIT,
-     *  RESULT,ABSERR,NEVAL,IER,ALIST,BLIST,RLIST,ELIST,IORD,LAST,
-     * 	NPR,PARAM)
+     *  LIMIT,RESULT,ABSERR,NEVAL,IER,ALIST,BLIST,RLIST,ELIST,
+     *  IORD,LAST,NPR,PARAM)	
 C.......................................................................
 C
 C   AUTHOR :     QUADPACK
@@ -872,7 +870,8 @@ c      avs=0.d0
         z0=z0/sigma
         tmp1=SRpsimm(z0,2,k0)
         do 235 i=1,np
-  235   sc1(i)=tmp1*x0(i)
+        sc1(i)=tmp1*x0(i)
+  235   continue
         sc1(np+1)=SRchisk(z0,k0)
         do 240 i=1,np+1     
         its0(i)=0.d0
@@ -894,7 +893,8 @@ c        z0=z0/sigma1
         call SRD2N(U,SIGMA,IS0,TMP2)
         tmp2=tmp2+SRPSI2N(z0,u)-alfa*beta-beta*ialf
         do 265 i=1,np
-  265   sc1(i)=tmp1*x0(i)+sa(i)
+        sc1(i)=tmp1*x0(i)+sa(i)
+  265   continue
         sc1(np+1)=tmp2
         do 280 i=1,np+1 
         its(i)=0.d0
@@ -903,13 +903,14 @@ c        z0=z0/sigma1
   270   continue    
   280   continue
 c
-        do 300 i=1,np+1
+        do 320 i=1,np+1
         do 300 j=1,i
         avts0(i,j)=avts0(i,j)+its0(i)*its0(j)/en2
         if (i.ne.j) avts0(j,i)=avts0(i,j)
         avts(i,j)=avts(i,j)+its(i)*its(j)/en2
         if (i.ne.j) avts(j,i)=avts(i,j)
   300   continue
+  320   continue
   500 continue
       return
       end
@@ -1051,7 +1052,11 @@ C
         ZV=DX/VV
         XZV=EXV(ZV)
       ENDIF
-      GOTO (10,20,30,40,50) I
+c     GOTO (10,20,30,40,50) I (obsolescent)
+      IF (I.EQ.2) GOTO 20
+      IF (I.EQ.3) GOTO 30
+      IF (I.EQ.4) GOTO 40
+      IF (I.EQ.5) GOTO 50
    10 CHIS1WP=(EXV(DX-B1)-1.D0)*ANS
       RETURN
    20 CHIS1WP=EXV(DX-B1)*ANS
@@ -1241,11 +1246,12 @@ c
 c     COMMON/PSIPR/IPSI,C,H1,H2,H3,XK,D
 c
 c
-      do 10 i=1,np+1
+      do 20 i=1,np+1
       do 10 j=1,np+1
         avts0(i,j)=0.d0
         avts(i,j)=0.d0
    10 continue
+   20 continue
       en2=dfloat(n)*dfloat(n-np)
  
   200 alfa=SRpezez(u)-SRpezez(l)
@@ -1260,7 +1266,8 @@ c
         z0=z0/sigma
         tmp1=SRpsimm(z0,2,xk)
         do 235 i=1,np
-  235   sc1(i)=tmp1*x0(i)
+        sc1(i)=tmp1*x0(i)
+  235   continue
         sc1(np+1)=SRchisk(z0,xk)
         do 240 i=1,np+1      
         its0(i)=0.d0
@@ -1283,7 +1290,8 @@ c        z0=z0/sigma1
         call SRD2W(L,U,SIGMA,ITS0,IS0,XBAR,NP,TMP2)
         tmp2=tmp2+SRPsi2w(z0,l,u)-alfa*beta-beta*ialf
         do 265 i=1,np
-  265   sc1(i)=tmp1*x0(i)+sa(i)
+        sc1(i)=tmp1*x0(i)+sa(i)
+  265   continue
         sc1(np+1)=tmp2
         do 280 i=1,np+1 
         its(i)=0.d0
@@ -1292,13 +1300,14 @@ c        z0=z0/sigma1
   270   continue    
   280   continue
 c
-        do 300 i=1,np+1
+        do 320 i=1,np+1
         do 300 j=1,i
         avts0(i,j)=avts0(i,j)+its0(i)*its0(j)/en2
         if (i.ne.j) avts0(j,i)=avts0(i,j)
         avts(i,j)=avts(i,j)+its(i)*its(j)/en2
         if (i.ne.j) avts(j,i)=avts(i,j)
   300   continue
+  320   continue
   500 continue
       return
       end

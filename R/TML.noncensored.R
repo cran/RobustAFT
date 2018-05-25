@@ -58,14 +58,17 @@ TML.noncensored<-function(formula, data, errors = "Gaussian", cu = NULL, initial
                                 nit0 <- z$k.iter
 			}
 			else {
-				z <- dfcomn2(ipsi = 4, xk = xk, beta = beta)
+#				z <- dfcomn2(ipsi = 4, xk = xk, beta = beta)
 				if (np <= 2 & n <= 500)
 					iopt <- 3
 				else iopt <- 1
 				if (nrep != 0)
 					iopt <- 2
-				z <- hysest(X, y, np + 1, iopt = iopt, intch = 1,
-				nrep = nrep, tols = tol, tolr = tol, iseed = seed)
+#				z <- hysest(X, y, np + 1, iopt = iopt, intch = 1,
+#				nrep = nrep, tols = tol, tolr = tol, iseed = seed)
+                                z <- hysestz(X, y, np + 1, iopt = iopt, intch = 1,
+ 				nrep = nrep, tols = tol, tolr = tol, iseed = seed,
+                                ipsi=4,xk=xk,beta=beta)
 				th0 <- z$theta[1:np]
 				v0 <- z$smin
                                 nit0 <- if (z$ierr<=1) 0 else nrep
@@ -137,9 +140,12 @@ TML.noncensored<-function(formula, data, errors = "Gaussian", cu = NULL, initial
 				else iopt <- 1
 				if (nrep != 0)
 					iopt <- 2
-				z <- dfcomn2(ipsi = 4, xk = xk, beta = beta)
-				z <- hysest(X, y, nq = np + 1, iopt = iopt, intch = 1,
-					nrep = nrep, tols = tol, tolr = tol, iseed = seed)
+#				z <- dfcomn2(ipsi = 4, xk = xk, beta = beta)
+#				z <- hysest(X, y, nq = np + 1, iopt = iopt, intch = 1,
+#					nrep = nrep, tols = tol, tolr = tol, iseed = seed)
+				z <- hysestz(X, y, nq = np + 1, iopt = iopt, intch = 1,
+					nrep = nrep, tols = tol, tolr = tol, iseed = seed,
+                                        ipsi = 4, xk = xk, beta = beta)
 				th0 <- z$theta[1:np]
 				v0 <- z$smin
 				b0 <- -0.1352

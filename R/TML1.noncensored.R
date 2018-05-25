@@ -9,9 +9,10 @@ function(y,errors= c("Gaussian", "logWeibull"), cu=NULL, initial=c("S","input"),
         maxit <- control$maxit
         tol <- control$tol
         n <- length(y)
- if (initial=="S")     {old <- comval(); dfcomn2(ipsi=4, xk=1.5477)
-                        Beta0 <- integrate(Chiphi, -10, 10)$value
-                        dfcomn2(ipsi=old$ipsi, xk=old$xk)
+ if (initial=="S")     {#old <- comval(); dfcomn2(ipsi=4, xk=1.5477)
+                        #Beta0 <- integrate(Chiphi, -10, 10)$value
+                        #dfcomn2(ipsi=old$ipsi, xk=old$xk)
+                        Beta0 <- 0.5
                         ctrS <- c(TML1.noncensored.control.S(...), k0=1.5477, k1=4.6873, Beta0=Beta0)
                        }
 if(errors == "Gaussian"){

@@ -1,4 +1,5 @@
 \name{RobustAFT-package}
+\alias{RobustAFT-package}
 \alias{RobustAFT}
 \docType{package}
 \title{
@@ -17,9 +18,9 @@ Package: \tab RobustAFT\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2011-05-01\cr
-License: \tab GPL version 2 or later\cr
+License: \tab GPL-2 or later\cr
+LazyLoad: \tab yes\cr
 }
-This package depends on the libraries robustbase, survival, splines.
 }
 \author{
 Alfio Marazzi <Alfio.Marazzi@chuv.ch>, Jean-Luc Muralti
@@ -27,8 +28,8 @@ Alfio Marazzi <Alfio.Marazzi@chuv.ch>, Jean-Luc Muralti
 Maintainer: A. Randriamiharisoa <Alex.Randriamiharisoa@chuv.ch>
 }
 \references{
-  Marazzi A., Yohai V. (2004). Adaptively truncated maximum likelihood regression with asymmetric errors.
-  \emph{Journal of Statistical Planning and Inference}, 122, 271-291.
+  Marazzi A., Yohai V. (2004). Adaptively truncated maximum likelihood regression with asymmetric 
+  errors. \emph{Journal of Statistical Planning and Inference}, 122, 271-291.
 
   Locatelli I., Marazzi A., Yohai V. (2010). Robust accelerated failure time regression.
   \emph{Computational Statistics and Data Analysis}, 55, 874-887.
@@ -36,11 +37,9 @@ Maintainer: A. Randriamiharisoa <Alex.Randriamiharisoa@chuv.ch>
   Marazzi A. (1993) \emph{Algorithm, Routines, and S functions for Robust Statistics}.  
   Wadsworth & Brooks/cole, Pacific Grove, California.
 }
-
-\keyword{ Regression }
-\keyword{ Robust}
-\keyword{ Accelerated Failure Time}
-
+\keyword{ regression }
+\keyword{ robust}
+\keyword{ package }
 \examples{
 # Example 1. This is the example described in Marazzi and Yohai (2004).
 # ---------
@@ -115,10 +114,11 @@ Age <- D243$age                              # Age (years)
 Dst <- D243$dest;   Dst <- (Dst=="DOMI")*1   # Destination (1=Home, 0=another hospital)
 Sex <- D243$Sexe;   Sex <- (Sex=="M"   )*1   # Sex (1=Male, 0=Female)
 
+\dontrun{
 # Plot data
 par(mfrow=c(1,2))
 plot(LOS,Cost); plot(log(LOS),log(Cost))
-\dontrun{
+
 # log-Weibull fits
 # ----------------
 # Full robust model
