@@ -1,4 +1,4 @@
-18b67b363258ceab8e36d961957551a6 *DESCRIPTION
+c68c37c0a2bc51144fe353406b25bf46 *DESCRIPTION
 92e4c8ef2c125331fdf9ec7106c01713 *NAMESPACE
 683b9ef4eb0b637b0669f7c08716da5d *R/AV.MM.gauss.R
 dc2c0744fe9e79528aa9e70f6b48744c *R/AveS20w.R
@@ -134,8 +134,8 @@ fd36292e966a8972946cb72edee4bfb3 *R/chi.R
 940868e1f1751fcf35712a222cef6928 *R/chi.weight.R
 e9b7afb974331a01411170a44271fd7f *R/chi_1.R
 91b77457e55cd15737d7d9ed777e7301 *R/coef.TML.r
-eb3bccfd3a1881d03b927394dda79b85 *R/comval.R
-f5ffd0968f08247050dbf5864714f36b *R/dfcomn2.R
+939b298475288ea4ba5acade24a19548 *R/comval.R
+1d5e32a48683d493b167032acc9adcfe *R/dfcomn2.R
 a2e63f4a5dbb2582078427355945f1dc *R/dfvals.R
 fc03365e0dee8945c204d1e8d6956f7e *R/dlweibul.r
 a21ff2dfa97ab4a0d76fce50fb96701e *R/ezez.R
@@ -246,6 +246,6 @@ fea0eb572201bba76c3f3ddbb9dad82f *man/plot.TML.rd
 c9756306643e2061bad00fbe51317c5f *man/plot.fits.compare.rd
 7978a6f7799a056651cacd2320b9c110 *man/predict.TML.rd
 5dcf8852bcb0beb3e64f2e9f9cfbef11 *man/summary.TML.rd
-8397551d123c1439958ea8600e5e3dd9 *src/init.c
-67f97e9b17c0a4f2c2c6ac2e97329bdd *src/robaft.f
-459b32c6caaa56af2bd7e51e01236d93 *src/tmlest.f
+c511e358ee6e0420c145f9db604f3ead *src/init.c
+b44e6cd02d4bd220ffe063025639103c *src/robaft.f
+cf9880791995ef8cdff2a6c6ce04049c *src/tmlest.f

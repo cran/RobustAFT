@@ -15,7 +15,7 @@ function (ipsi = -9, c = -1.345, h1 = -1.7, h2 = -3.4, h3 = -8.5,
 #       em = to.single(em), cr = to.single(cr), vk = to.single(vk),
 #       np = to.integer(np), enu = to.single(nu), v7 = to.single(v7),
 #       iwww = to.integer(iwww))
-    f.res <- .Fortran("dfcomn2", ipsi = to.integer(ipsi), c = to.single(c),
+    f.res <- .Fortran("dfcomn2z", ipsi = to.integer(ipsi), c = to.single(c),
         h1 = to.single(h1), h2 = to.single(h2), h3 = to.single(h3),
         xk = to.single(xk), d = to.single(d), beta = to.single(beta),
         bet0 = to.single(bet0), iucv = to.integer(iucv), a2 = to.single(a2),

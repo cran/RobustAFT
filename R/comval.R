@@ -24,7 +24,7 @@ function() {
         enu <- single(1)
         v7 <- single(1)
         iwww <- integer(1)
-        f.res <- .Fortran("comval",
+        f.res <- .Fortran("comvalz",
                 ipsi = as.integer(ipsi),
                 c = as.single(c),
                 h1 = as.single(h1),

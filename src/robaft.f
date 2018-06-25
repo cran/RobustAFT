@@ -547,7 +547,51 @@ C
 C
 C-----------------------------------------------------------------------
 C
-      SUBROUTINE COMVAL(IPSI,C,H1,H2,H3,XK,D,BTA,BT0,IUCV,A2,B2,CHK,
+      SUBROUTINE DFCOMN2Z(IPSI,C,H1,H2,H3,XK,D,BTA,BT0,IUCV,A2,B2,CHK,
+     +                   CKW,BB,BT,CW,EM,CR,VK,NP,ENU,V7,IWWW)
+C.......................................................................
+C
+C   COPYRIGHT  1992  Alfio Marazzi
+C
+C   AUTHOR : A. RANDRIAMIHARISOA
+C.......................................................................
+C
+      COMMON/UCVPR/JUCV,AA,AB,PHK,PKW,PBB,PBT,PW
+      COMMON/UCV56/PM,PCR,PK,NNP,PNU,P7
+      COMMON/PSIPR/JPSI,PC,PH1,PH2,PH3,PXK,PD
+      COMMON/WWWPR/JWWW
+      COMMON/BETA/BETA,BET0
+      IF (IPSI.GE.-5) JPSI=IPSI
+      IF (C .GE.0.)  PC=C
+      IF (H1.GE.0.)  PH1=H1
+      IF (IPSI.EQ.10) PH1=H1
+      IF (H2.GE.0.)  PH2=H2
+      IF (H3.GE.0.)  PH3=H3
+      IF (XK.GE.0.)  PXK=XK
+      IF (D .GE.0.)  PD=D
+      IF (BTA.GE.0.) BETA=BTA
+      IF (BT0.GE.0.) BET0=BT0
+      IF (IUCV.GE.0) JUCV=IUCV
+      IF (A2.GE.0.)  AA=A2
+      IF (B2.GE.0.)  AB=B2
+      IF (CHK.GE.0.) PHK=CHK
+      IF (CKW.GE.0.) PKW=CKW
+      IF (BB.GE.0.)  PBB=BB
+      IF (BT.GE.0.)  PBT=BT
+      IF (CW.GE.0.)  PW=CW
+      IF (EM.GT.0.)  PM=EM
+      IF (CR.GT.0.)  PCR=CR
+      IF (VK.GT.0.)  PK=VK
+      IF (NP.GT.0)   NNP=NP
+      IF (ENU.GT.0.) PNU=ENU
+      IF (V7.GT.0.)  P7=V7
+      IF (IWWW.GE.0) JWWW=IWWW
+      RETURN
+      END
+C
+C-----------------------------------------------------------------------
+C
+      SUBROUTINE COMVALZ(IPSI,C,H1,H2,H3,XK,D,BTA,BT0,IUCV,A2,B2,CHK,
      +                  CKW,BB,BT,CW,EM,CR,VK,NP,ENU,V7,IWWW)
 C.......................................................................
 C
@@ -991,7 +1035,8 @@ C
         DO 100 I=1,128
         ISEED=ISEED*5761+999
         ISEED=MOD(ISEED,65536)
-  100   T(I)=FLOAT(ISEED)/65536.0
+        T(I)=FLOAT(ISEED)/65536.0
+  100   CONTINUE
       ENDIF
       ISEED=ISEED*5761+999
       ISEED=MOD(ISEED,65536)
@@ -1067,11 +1112,12 @@ C
       DIMENSION NREPQ(8),NREPE(5)
       DATA NREPQ/150,300,400,500,600,700,850,1250/
       DATA NREPE/500,1000,1500,2000,2500/
+	  ICNREP=0
 C     GOTO (1,2,3,4) IOPT+1 (obsolescent)
       IF (IOPT.EQ.1) GOTO 2
       IF (IOPT.EQ.2) GOTO 3
       IF (IOPT.EQ.3) GOTO 4
-    1 IF(NP .GE. 9) THEN
+      IF(NP .GE. 9) THEN
          ICNREP=1500
       ELSE
          ICNREP=NREPQ(NP)
@@ -1382,7 +1428,7 @@ c         IF (irep.eq.5) then
 c           call realpr('rnd',3,ver,5)
 c           irep=0
 c         endif
-          ITK=RND*N+1
+          ITK=INT(RND*FLOAT(N))+1
           DO 120 KK=1,K-1
           IF (ITK.EQ.IT(KK)) GOTO 110
   120     CONTINUE
@@ -1605,11 +1651,11 @@ C
       IF (INCX.LT.0) IX=(-N+1)*INCX+1
       IF (INCY.LT.0) IY=(-N+1)*INCY+1
       DO 10 I=1,N
-      DTEMP=DTEMP+X(IX)*DBLE(Y(IY))
+      DTEMP=DTEMP+DBLE(X(IX)*Y(IY))
       IX=IX+INCX
       IY=IY+INCY
    10 CONTINUE
-      RESULT=DTEMP
+      RESULT=SNGL(DTEMP)
       RETURN
 C
 C  CODE FOR BOTH INCREMENTS EQUAL TO 1
@@ -1617,16 +1663,16 @@ C
    20 M=MOD(N,5)
       IF (M.EQ.0) GOTO 40
       DO 30 I=1,M
-      DTEMP=DTEMP+X(I)*DBLE(Y(I))
+      DTEMP=DTEMP+DBLE(X(I)*Y(I))
    30 CONTINUE
       IF (N.LT.5) GOTO 60
    40 MP1=M+1
       DO 50 I=MP1,N,5
-      DTEMP=DTEMP+X(I)*DBLE(Y(I))+X(I+1)*DBLE(Y(I+1))+
-     1      X(I+2)*DBLE(Y(I+2))+X(I+3)*DBLE(Y(I+3))+
-     1      X(I+4)*DBLE(Y(I+4))
+      DTEMP=DTEMP+DBLE(X(I)*Y(I))+DBLE(X(I+1)*Y(I+1))+
+     1      DBLE(X(I+2)*Y(I+2))+DBLE(X(I+3)*Y(I+3))+
+     1      DBLE(X(I+4)*Y(I+4))
    50 CONTINUE
-   60 RESULT=DTEMP
+   60 RESULT=SNGL(DTEMP)
       RETURN
       END
 C
@@ -1710,19 +1756,19 @@ C
    10 CONTINUE
 C     IF (CL) 130,130,20 (obsolescent)
       IF (CL.LE.0.0) GOTO 130
-   20 CLINV=ONE/CL
-      SM=(DBLE(U(1,LPIVOT))*CLINV)**2
+      CLINV=ONE/CL
+      SM=(DBLE(U(1,LPIVOT)*CLINV))**2
       DO 30 J=L1,M
-      SM=SM+(DBLE(U(1,J))*CLINV)**2
+      SM=SM+(DBLE(U(1,J)*CLINV))**2
    30 CONTINUE
 C
 C  CONVERT DBLE. PRE. SM TO SNGL. PREC. SM1
 C
-      SM1=SM
+      SM1=SNGL(SM)
       CL=CL*SQRT(SM1)
 C     IF (U(1,LPIVOT)) 50,50,40 (obsolescent)
       IF (U(1,LPIVOT).LE.0.0) GOTO 50
-   40 CL=-CL
+      CL=-CL
    50 UP=U(1,LPIVOT)-CL
       U(1,LPIVOT)=CL
       GOTO 70
@@ -1738,24 +1784,24 @@ C  B MUST BE NONPOSITIVE HERE. IF B=0., RETURN.
 C
 C     IF (B) 80,130,130 (obsolescent)
       IF (B.GE.0.D0) GOTO 130
-   80 B=ONE/B
+      B=ONE/B
       I2=1-ICV+ICE*(LPIVOT-1)
       INCR=ICE*(L1-LPIVOT)
       DO 120 J=1,NCV
       I2=I2+ICV
       I3=I2+INCR
       I4=I3
-      SM=C(I2)*DBLE(UP)
+      SM=DBLE(C(I2)*UP)
       DO 90 I=L1,M
-      SM=SM+C(I3)*DBLE(U(1,I))
+      SM=SM+DBLE(C(I3)*U(1,I))
       I3=I3+ICE
    90 CONTINUE
 C     IF (SM) 100,120,100 (obsolescent)
       IF (SM.EQ.0.D0) GOTO 120
-  100 SM=SM*B
-      C(I2)=C(I2)+SM*DBLE(UP)
+      SM=SM*B
+      C(I2)=C(I2)+SNGL(SM*DBLE(UP))
       DO 110 I=L1,M
-      C(I4)=C(I4)+SM*DBLE(U(1,I))
+      C(I4)=C(I4)+SNGL(SM*DBLE(U(1,I)))
       I4=I4+ICE
   110 CONTINUE
   120 CONTINUE
@@ -1796,10 +1842,10 @@ C
       DO 50 J=IP1,K
       SM=SM+X(I,J)*DBLE(THETA(J))
    50 CONTINUE
-   60 SM1=SM
+   60 SM1=SNGL(SM)
 c     IF (X(I,I)) 80,70,80 (obsolescent)
       IF (X(I,I).NE.0.0) GOTO 80
-   70 CALL MESSGE(501,'SOLV  ',1)
+      CALL MESSGE(501,'SOLV  ',1)
       THETA(I)=(THETA(I)-SM1)/X(I,I)
    80 CONTINUE
       RETURN
@@ -1907,11 +1953,11 @@ C
       LJ=J1
       JM1=J-1
       DO 20 L=I,JM1
-      SM=SM+R(IL)*DBLE(R(LJ))
+      SM=SM+DBLE(R(IL)*R(LJ))
       LJ=LJ+1
       IL=IL+L
    20 CONTINUE
-      R(J1)=-R(LJ)*SM
+      R(J1)=-R(LJ)*SNGL(SM)
       J1=J1+J
    30 CONTINUE
    40 CONTINUE
@@ -1964,7 +2010,7 @@ C
       JJ=JJ+J
       S=DBLE(A(JJ))-S
       IF (S.LE.0.D0) GOTO 40
-      A(JJ)=DSQRT(S)
+      A(JJ)=SNGL(DSQRT(S))
    30 CONTINUE
       INFO=0
    40 CONTINUE
@@ -2029,9 +2075,9 @@ C
       DO 200 I=1,N
         SUM=0.D0
         DO 100 J=1,NP
-          SUM=SUM+X(I,J)*DBLE(THETA(J))
+          SUM=SUM+DBLE(X(I,J)*THETA(J))
   100   CONTINUE
-        RS(I)=Y(I)-SUM
+        RS(I)=Y(I)-SNGL(SUM)
   200 CONTINUE
       RETURN
       END
@@ -2130,12 +2176,12 @@ C
       DO 20 J=L1,L
       K=K+1
       IF (J.EQ.L) GOTO 10
-      SM=SM+DBLE(S(J))*(X(I)*Y(K)+X(K)*Y(I))
+      SM=SM+DBLE(S(J)*(X(I)*Y(K)+X(K)*Y(I)))
       GOTO 20
-   10 SM=SM+DBLE(S(J))*X(I)*Y(I)
+   10 SM=SM+DBLE(S(J)*X(I)*Y(I))
    20 CONTINUE
    30 CONTINUE
-      RESULT=SM
+      RESULT=SNGL(SM)
       RETURN
       END
 
@@ -2217,6 +2263,9 @@ C
       DIMENSION WGT(N)
       EXTERNAL FCHI,FEXT
       COMMON/INTPAR/ITYPE,INTPAR,NEVAL,LIMIT,KEY
+      DATA NCALL,FX1/0,0.0/
+      IF (NCALL.EQ.1) FX1=FEXT(1.0)
+      CHIPHI=FX1
       CALL XERF(2,S,PHI)
       IF (ITYPE.EQ.3) GOTO 30
 C
@@ -2229,7 +2278,8 @@ C  SCHWEPPE CASE
 C
    30 SM=0.
       DO 40 J=1,N
-   40 IF (WGT(J).GT.0.) SM=SM+WGT(J)*WGT(J)*FCHI(S/WGT(J))
+      IF (WGT(J).GT.0.) SM=SM+WGT(J)*WGT(J)*FCHI(S/WGT(J))
+   40 CONTINUE 
       CHIPHI=SM*PHI
       RETURN
       END
@@ -2251,6 +2301,9 @@ C
       DIMENSION WGT(N)
       EXTERNAL FPSI,FEXT
       COMMON/INTPAR/ITYPE,I,NEVAL,LIMIT,KEY
+      DATA NCALL,FX1/0,0.0/
+      IF (NCALL.EQ.1) FX1=FEXT(1.0)
+      PSPPHI=FX1
       R=S
       CALL XERF(2,R,PHI)
       PHI=R*PHI
@@ -2276,6 +2329,9 @@ C
       DIMENSION WGT(N)
       EXTERNAL FPSI,FEXT
       COMMON/INTPAR/ITYPE,I,NEVAL,LIMIT,KEY
+      DATA NCALL,FX1/0,0.0/
+      IF (NCALL.EQ.1) FX1=FEXT(1.0)
+      PS2PHI=FX1
       R=S
       CALL XERF(2,R,PHI)
       IF (ITYPE.EQ.3) R=R/WGT(I)
@@ -2629,7 +2685,7 @@ C
       DO 50 K=1,N
       SM1=SM1+DBLE(X(K,I))*X(K,J)
    50 CONTINUE
-      COV(L)=SM1
+      COV(L)=SNGL(SM1)
    55 CONTINUE
    60 CONTINUE
 C
@@ -3585,6 +3641,8 @@ C
      * CALL MESSGE(500,'SMINAC',1)
       KAPPA=9.E9
       SMINK=9.E9
+	  SMIN2=0.0
+      CNST2=SIGMA0
       MSTOR=1
       KSTOR=1
       CNST(1)=0.0
@@ -4034,7 +4092,7 @@ c        SWI=SW(I)
       ENDIF 
 C 360 continue 
   370 CONTINUE
-  380 SUMI=SUMI/DFLOAT(N)
+      SUMI=SUMI/DFLOAT(N)
       EQB=SNGL(SUMI)
       SIGMA=SIG*SQRT(EQB/B)
       RETURN
@@ -4586,7 +4644,7 @@ c
       G=DBLE(WGT(2))
       S=DBLE(WGT(3))
       SIGMA=DBLE(WGT(4))
-      ITYP=WGT(5)
+      ITYP=INT(WGT(5))
       XXK=DBLE(XK)
       LOW=(DBLE(VI)-G)/S-MU0
       SUMA=0.D0
@@ -4684,7 +4742,7 @@ C
 C
 C  Initializations
 C
-      ITYP=WGT(5)
+      ITYP=INT(WGT(5))
       ANS=EXU(DX,ITYP)
       SIGMBL=0.D0
       IF (ANS.EQ.0.D0) RETURN
@@ -5637,17 +5695,20 @@ C       SUMR=SUMR+DBLE(WRI*PIJ)
   200   CONTINUE
         SUMI=SUMP/DBLE(AI)
         DO 220 J=1,NP
-  220   RES(J)=RES(J)+SUMI*DBLE(X(I,J))
+        RES(J)=RES(J)+SUMI*DBLE(X(I,J))
+  220   CONTINUE 
 C       RES(NP+1)=RES(NP+1)+SUMR/DBLE(AI)
         GOTO 370
       ENDIF 
   330 DO 340 J=1,NP
-  340 RES(J)=RES(J)+SUMI*DBLE(X(I,J))
+      RES(J)=RES(J)+SUMI*DBLE(X(I,J))
+  340 CONTINUE
 c 350 WRI=RHO(TMP)
 c     RES(NP+1)=RES(NP+1)+DBLE(WRI)
   370 CONTINUE
       DO 380 J=1,NP
-  380 RES(J)=RES(J)/DFLOAT(N)
+      RES(J)=RES(J)/DFLOAT(N)
+  380 CONTINUE
 c     RES(NP+1)=RES(NP+1)-0.5D0
       RETURN
       END
@@ -5763,10 +5824,11 @@ C
       LINT=0
       DS=DBETA(NP+1)
       NP1=NP+1
-      DO 10 I=1,NP1
+      DO 15 I=1,NP1
       DO 10 J=1,NP1
       RES(I,J)=0.D0
    10 CONTINUE
+   15 CONTINUE
         DO 20 J=1,NP
         BETA(1,J)=SNGL(DBETA(J))
    20   CONTINUE
@@ -6262,12 +6324,14 @@ C
       DOUBLE PRECISION ANS,EXU,DX
       EXTERNAL EXU,EXV
       COMMON/PSIPR/IPSI,CPSI,H1,H2,H3,XK,DCHI
+      DATA NCALL,FX1/0,0.0/
+      IF (NCALL.EQ.1) FX1=EXV(1.0)
+      F0GMBL=DBLE(FX1)
 C
 C  Initializations
 C
-      ITYP=WGT(1)
+      ITYP=INT(WGT(1))
       ANS=EXU(DX,ITYP)
-      F0GMBL=0.D0
       IF (ANS.EQ.0.D0) RETURN
       F0GMBL=DX*ANS
       RETURN
@@ -6417,7 +6481,8 @@ C     IF (IPSI.EQ.2.OR.IPSI.EQ.3) DCHI=TU
       ENDIF    
   270 CONTINUE
       DO 300 I=1,NP+1
-  300 RES(I)=RES(I)/DFLOAT(N)
+      RES(I)=RES(I)/DFLOAT(N)
+  300 CONTINUE
       RES(NP1)=RES(NP1)-0.5D0
       RETURN
       END
@@ -6897,7 +6962,7 @@ C                                  CERFD(XBIG) .APPROX. DETAP
       DATA               XBIG/13.3D0/
       DATA               SQRPI/.5641895835477563D0/
 C
-      Y=X
+      Y=SNGL(X)
       XX = Y
       ISW = 1
       IF (XX.GE.0.0D0) GO TO 5
@@ -7222,7 +7287,7 @@ C     GOTO (30,50,70,110), LABEL  (obsolescent)
       IF (LABEL.EQ.2) GOTO 50
 	  IF (LABEL.EQ.3) GOTO 70
 	  IF (LABEL.EQ.4) GOTO 110
-   30 IF (ABS(X(I)).GT.CUTLO) GOTO 85
+      IF (ABS(X(I)).GT.CUTLO) GOTO 85
 C     ASSIGN 50 TO NEXT
       LABEL=2
       XMAX=ZERO
@@ -7277,7 +7342,7 @@ C
       IF (ABS(X(J)).GE.HITEST) GOTO 100
       SUM=SUM+X(J)*DBLE(X(J))
   95  CONTINUE
-      XNRM=DSQRT(SUM)
+      XNRM=SNGL(DSQRT(SUM))
       GOTO 300
 C
   200 CONTINUE
@@ -7286,7 +7351,7 @@ C
 C
 C  END MAIN LOOP
 C
-      XNRM=XMAX*DSQRT(SUM)
+      XNRM=XMAX*SNGL(DSQRT(SUM))
   300 CONTINUE
       RETURN
       END
@@ -7613,7 +7678,7 @@ C
       ABSERR = ERRSUM
    60 IF(KEYF.NE.1) NEVAL = (10*KEYF+1)*(2*NEVAL+1)
       IF(KEYF.EQ.1) NEVAL = 30*NEVAL+15
-  999 IF (IER.NE.0) CALL MESSGE(400+IER,'QAGE1 ',0)
+      IF (IER.NE.0) CALL MESSGE(400+IER,'QAGE1 ',0)
       RETURN
       END
 C

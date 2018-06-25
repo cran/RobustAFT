@@ -123,7 +123,7 @@ C-----------------------------------------------------------------------
 C
       SUBROUTINE SRQAGE1T(F,FARR,N,FEXT,GEXT,A,B,EPSABS,EPSREL,KEY,
      *  LIMIT,RESULT,ABSERR,NEVAL,IER,ALIST,BLIST,RLIST,ELIST,
-     *  IORD,LAST,NPR,PARAM)	
+     *  IORD,LAST,NPR,PARAM)
 C.......................................................................
 C
 C   AUTHOR :     QUADPACK
@@ -316,7 +316,7 @@ C
    60 IF(KEYF.NE.1) NEVAL = (10*KEYF+1)*(2*NEVAL+1)
       IF(KEYF.EQ.1) NEVAL = 30*NEVAL+15
 C  999 IF (IER.NE.0) CALL MESSGE(400+IER,'QAGE1D',0)
-  999 CONTINUE
+c 999 CONTINUE
       RETURN
       END
 C
@@ -628,7 +628,7 @@ C                                  CERFD(XBIG) .APPROX. DETAP
       DATA               XBIG/13.3D0/
       DATA               SQRPI/.5641895835477563D0/
 C
-      Y=X
+      Y=SNGL(X)
       XX = Y
       ISW = 1
       IF (XX.GE.0.0D0) GO TO 5
@@ -716,7 +716,7 @@ c
 c     COMMON/PSIPR/IPSI,C,H1,H2,H3,XK,D
 c      
 c     K0=DBLE(XK)
-  300 TMP=1.D0
+      TMP=1.D0
       ABST=DABS(S)
       IF (ABST.GE.K0) GOTO 400
       S2=(S/K0)**2
@@ -777,7 +777,7 @@ c
 c
       SUBROUTINE SRD1N(U,SIGMA,IT0,XtX,NP,VAL)
       DOUBLE PRECISION U,L,SIGMA,IT0(NP),XtX(NP,NP),TMP1,
-     +       DNORM0,EZU,VAL(NP)
+     +       TMP,DNORM0,EZU,VAL(NP)
       EXTERNAL DNORM0
       L=-U
 c     TMP2=(U*U-L*L)*IS0=0.D0
@@ -847,16 +847,17 @@ c
 c     IPSI=4
 c     K0=1.548D0
 c
-      do 10 i=1,np+1
+      do 20 i=1,np+1
       do 10 j=1,np+1
         avts0(i,j)=0.d0
         avts(i,j)=0.d0
    10 continue
+   20 CONTINUE
 c      avs0=0.d0
 c      avs=0.d0
       tmp1=xbar(1)
       en2=dfloat(n)*dfloat(n-np)
-  200 pnrm0=pnorm0(u)
+      pnrm0=pnorm0(u)
       alfa=2.d0*pnrm0-1.d0
       beta=SRBETAN(u)
 
@@ -1043,10 +1044,11 @@ C
       implicit double precision(a-h,o-z)
       DIMENSION WGT(N),PAR(NP)
       EXTERNAL EXU,EXV
-      I=PAR(1)
-      I=WGT(1)
+      CHIS1WP=0.D0 * PAR(1)
+      I=IDINT(WGT(1))
       B1=WGT(2)
       ANS=EXU(DX)
+	  XZV=0.D0
       IF (I.GE.4) THEN
         VV=B1
         ZV=DX/VV
@@ -1057,7 +1059,7 @@ c     GOTO (10,20,30,40,50) I (obsolescent)
       IF (I.EQ.3) GOTO 30
       IF (I.EQ.4) GOTO 40
       IF (I.EQ.5) GOTO 50
-   10 CHIS1WP=(EXV(DX-B1)-1.D0)*ANS
+      CHIS1WP=(EXV(DX-B1)-1.D0)*ANS
       RETURN
    20 CHIS1WP=EXV(DX-B1)*ANS
       RETURN
@@ -1254,7 +1256,7 @@ c
    20 continue
       en2=dfloat(n)*dfloat(n-np)
  
-  200 alfa=SRpezez(u)-SRpezez(l)
+      alfa=SRpezez(u)-SRpezez(l)
       beta=SRBetaw(l,u)
       do 500 k=1,n
         y0=y(k)

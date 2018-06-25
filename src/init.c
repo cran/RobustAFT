@@ -8,14 +8,15 @@ tools::package_native_routine_registration_skeleton('c:/data/R/R-3.4.3/library/R
 Copy all text results to file init.c
 
 Replace void * by int*, float* or double* for each subroutine
+To avoid duplicated symbols, subroutine comval and dfcomn2 are renamed comvalz and dfcomn2z
 */
 
 /* .Fortran calls */
 extern void F77_NAME(av_tmlnf)(double*, double*, int*, int*, int*, double*, int*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*);
 extern void F77_NAME(av_tmlwf)(double*, double*, int*, int*, int*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*);
 extern void F77_NAME(chia)(int*, float*, float*);
-//extern void F77_NAME(comval)(int*, float*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, int*);
-//extern void F77_NAME(dfcomn2)(int*, float*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, int*);
+extern void F77_NAME(comvalz)(int*, float*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, int*);
+extern void F77_NAME(dfcomn2z)(int*, float*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, int*);
 extern void F77_NAME(int44)(float*, float*, float*, float*, float*, float*, int*, int*, int*, float*, int*, int*, int*, int*, int*, float*, float*, float*, int*, int*, int*, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*);
 extern void F77_NAME(int51)(float*, float*, int*, float*, int*, int*, float*, int*, int*, int*, int*, float*, float*, float*);
 extern void F77_NAME(int59)(float*, float*);
@@ -38,12 +39,11 @@ extern void F77_NAME(srpspamm)(int*, double*, double*, int*, double*);
 extern void F77_NAME(srrhoamm)(int*, double*, double*, int*, double*);
 extern void F77_NAME(zdfvals)(int*, float*);
 
-/*
-    {"nrm2",     (DL_FUNC) &F77_NAME(nrm2),      5},
-    {"comval",   (DL_FUNC) &F77_NAME(comval),   24},
-    {"dfcomn2",  (DL_FUNC) &F77_NAME(dfcomn2),  24},
-*/
+//   {"nrm2",     (DL_FUNC) &F77_NAME(nrm2),      5},   
+
 static const R_FortranMethodDef FortranEntries[] = {
+    {"comvalz",  (DL_FUNC) &F77_NAME(comvalz),  24},
+    {"dfcomn2z", (DL_FUNC) &F77_NAME(dfcomn2z), 24},
     {"av_tmlnf", (DL_FUNC) &F77_NAME(av_tmlnf), 20},
     {"av_tmlwf", (DL_FUNC) &F77_NAME(av_tmlwf), 21},
     {"chia",     (DL_FUNC) &F77_NAME(chia),      3},
