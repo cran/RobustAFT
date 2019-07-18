@@ -1112,7 +1112,7 @@ C
       DIMENSION NREPQ(8),NREPE(5)
       DATA NREPQ/150,300,400,500,600,700,850,1250/
       DATA NREPE/500,1000,1500,2000,2500/
-	  ICNREP=0
+      ICNREP=0
 C     GOTO (1,2,3,4) IOPT+1 (obsolescent)
       IF (IOPT.EQ.1) GOTO 2
       IF (IOPT.EQ.2) GOTO 3
@@ -3641,7 +3641,7 @@ C
      * CALL MESSGE(500,'SMINAC',1)
       KAPPA=9.E9
       SMINK=9.E9
-	  SMIN2=0.0
+      SMIN2=0.0
       CNST2=SIGMA0
       MSTOR=1
       KSTOR=1
@@ -4615,7 +4615,7 @@ C
       G=DBLE(WGT(2))
       SIG=DBLE(WGT(3))
       SSN=DBLE(WGT(4))
-      ITYP=WGT(5)
+      ITYP=INT(WGT(5))
       IF (SSN.LT.1.D-4) SSN=1.D-4
       AA=(SIG*(DX+MU0)+G)/SSN
       ANS=EXU(AA,ITYP)
@@ -6416,7 +6416,7 @@ C
 C
 C  Initializations
 C
-      ITYP=WGT(1)
+      ITYP=INT(WGT(1))
       XMU=DX+DBLE(WGT(2))
       ANS=EXU(XMU,ITYP)
       FUGMBL=0.D0
@@ -7285,8 +7285,8 @@ C
 C     GOTO NEXT,(30,50,70,110)
 C     GOTO (30,50,70,110), LABEL  (obsolescent)
       IF (LABEL.EQ.2) GOTO 50
-	  IF (LABEL.EQ.3) GOTO 70
-	  IF (LABEL.EQ.4) GOTO 110
+      IF (LABEL.EQ.3) GOTO 70
+      IF (LABEL.EQ.4) GOTO 110
       IF (ABS(X(I)).GT.CUTLO) GOTO 85
 C     ASSIGN 50 TO NEXT
       LABEL=2
@@ -7351,7 +7351,7 @@ C
 C
 C  END MAIN LOOP
 C
-      XNRM=XMAX*SNGL(DSQRT(SUM))
+      XNRM=SNGL(XMAX*DSQRT(SUM))
   300 CONTINUE
       RETURN
       END

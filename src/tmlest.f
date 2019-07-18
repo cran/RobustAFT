@@ -130,7 +130,7 @@ C   AUTHOR :     QUADPACK
 C                ADAPTED FOR ROBETH BY A. RANDRIAMIHARISOA
 C.......................................................................
 C
-	  implicit double precision(a-h, o-z)
+       implicit double precision(a-h, o-z)
 C      DOUBLE PRECISION A,ABSERR,ALIST,AREA,AREA1,AREA12,AREA2,
 C     *  AA1,AA2,B,
 C     *  BLIST,BB1,BB2,C,DABS,DEFABS,DEFAB1,DEFAB2,DMAX1,ELIST,EPMACH,
@@ -841,7 +841,8 @@ c
      +       x0(np),avts0(np+1,np+1),avts(np+1,np+1),invm0(np+1,np+1),
      +       invm1(np+1,np+1),its0(np+1),its(np+1),is0,ialf,IALPHAN,
      +       sa(ncov),sc1(ncov)
-      external pnorm0,IALPHAN,SRPSI1N,SRPSI2N, SRpsimm, SRchisk
+      external pnorm0,IALPHAN,SRPSI1N,SRPSI2N, SRpsimm,SRchisk,SRBETAN,
+     +         SRD1N,SRD2N
 c     COMMON/PSIPR/IPSI,C,H1,H2,H3,XK,D
 c
 c     IPSI=4
@@ -918,7 +919,6 @@ c
 C
 C********************************************************************************
 C
-
       DOUBLE PRECISION FUNCTION SRRHOW(Z,CONST)
       implicit double precision(a-h,o-z)
       EXTERNAL SRXEXPD
@@ -1048,7 +1048,7 @@ C
       I=IDINT(WGT(1))
       B1=WGT(2)
       ANS=EXU(DX)
-	  XZV=0.D0
+      XZV=0.D0
       IF (I.GE.4) THEN
         VV=B1
         ZV=DX/VV

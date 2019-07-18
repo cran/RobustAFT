@@ -12,23 +12,23 @@ To avoid duplicated symbols, subroutine comval and dfcomn2 are renamed comvalz a
 */
 
 /* .Fortran calls */
-extern void F77_NAME(av_tmlnf)(double*, double*, int*, int*, int*, double*, int*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*);
+extern void F77_NAME(av_tmlnf)(double*, double*, int*, int*, int*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*);
 extern void F77_NAME(av_tmlwf)(double*, double*, int*, int*, int*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*);
 extern void F77_NAME(chia)(int*, float*, float*);
-extern void F77_NAME(comvalz)(int*, float*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, int*);
-extern void F77_NAME(dfcomn2z)(int*, float*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, int*);
+extern void F77_NAME(comvalz)(int*, float*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*, int*);
+extern void F77_NAME(dfcomn2z)(int*, float*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*, int*);
 extern void F77_NAME(int44)(float*, float*, float*, float*, float*, float*, int*, int*, int*, float*, int*, int*, int*, int*, int*, float*, float*, float*, int*, int*, int*, int*, int*, int*, int*, float*, float*, float*, float*, float*, float*, float*, int*, float*, float*);
 extern void F77_NAME(int51)(float*, float*, int*, float*, int*, int*, float*, int*, int*, int*, int*, float*, float*, float*);
 extern void F77_NAME(int59)(float*, float*);
 extern void F77_NAME(int60)(float*, float*);
 extern void F77_NAME(int61)(float*, float*);
 extern void F77_NAME(int62)(float*, float*);
-extern void F77_NAME(int92)(int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*);
+extern void F77_NAME(int92)(float*, float*, float*, int*, int*, int*, float*, int*, float*, float*, int*, int*, int*, int*, int*, float*, float*, float*);
 extern void F77_NAME(intz21)(float*, float*, int*, int*, int*, int*, int*, int*, int*, int*, int*, int*, float*, float*, float*, float*, int*, int*, int*, int*, int*, int*, int*, int*, float*, float*, float*, int*, float*, float*, int*);
 //extern void F77_NAME(nrm2)(float*, int*, int*, int*, float*);
 extern void F77_NAME(psia)(int*, float*, float*);
 extern void F77_NAME(pspa)(int*, float*, float*);
-extern void F77_NAME(qn)(float*, int*, float*, float*, float*, float*, float*, int*, int*, int*, int*, int*, int*);
+extern void F77_NAME(qn)(float*, int*, float*, float*, int*, float*, float*, int*, int*, int*, int*, int*, int*);
 extern void F77_NAME(rhoa)(int*, float*, float*);
 extern void F77_NAME(sigama)(float*, float*, float*, float*, float*, float*, int*, float*, float*, float*, float*, float*, int*, int*, int*, int*, int*, int*, int*, int*, float*, int*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, float*, int*, int*);
 extern void F77_NAME(srchiamm)(int*, double*, double*, int*, double*);
