@@ -1,4 +1,4 @@
-7d88da11e81af026b98280ce333d05c9 *DESCRIPTION
+318fcdec60a542afcdfe85228df08133 *DESCRIPTION
 92e4c8ef2c125331fdf9ec7106c01713 *NAMESPACE
 683b9ef4eb0b637b0669f7c08716da5d *R/AV.MM.gauss.R
 dc2c0744fe9e79528aa9e70f6b48744c *R/AveS20w.R
@@ -247,5 +247,5 @@ c9756306643e2061bad00fbe51317c5f *man/plot.fits.compare.rd
 7978a6f7799a056651cacd2320b9c110 *man/predict.TML.rd
 5dcf8852bcb0beb3e64f2e9f9cfbef11 *man/summary.TML.rd
 039553b6e590e9c8ffbf3b79c23f5ffa *src/init.c
-ad474a23ad339ee5367f806fdb37ee7f *src/robaft.f
+6d393bc5bec0ccbea8719114244f06ea *src/robaft.f
 6b825c664e15952db33e016bd137f718 *src/tmlest.f
