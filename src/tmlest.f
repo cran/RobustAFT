@@ -857,7 +857,7 @@ c
 c      avs0=0.d0
 c      avs=0.d0
       tmp1=xbar(1)
-      en2=dfloat(n)*dfloat(n-np)
+      en2=DBLE(n)*DBLE(n-np)
       pnrm0=pnorm0(u)
       alfa=2.d0*pnrm0-1.d0
       beta=SRBETAN(u)
@@ -1086,7 +1086,7 @@ C
       KEY=1
       LO=TL
       HI=TU
-      WGT(1)=DFLOAT(IWGT)
+      WGT(1)=DBLE(IWGT)
       WGT(2)=B1
       CALL SRINTGRT(CHIS1WP,WGT,2,SRezez,SRXEXPD,LO,HI,TIL,TIL,
      1            KEY,LIMIT,SUM,ERRSTD,NEVAL,IER,WORK,IWORK,2,WGT)
@@ -1254,7 +1254,7 @@ c
         avts(i,j)=0.d0
    10 continue
    20 continue
-      en2=dfloat(n)*dfloat(n-np)
+      en2=DBLE(n)*DBLE(n-np)
  
       alfa=SRpezez(u)-SRpezez(l)
       beta=SRBetaw(l,u)

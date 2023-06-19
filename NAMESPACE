@@ -1,6 +1,7 @@
 useDynLib(RobustAFT, .registration=TRUE)
 import(stats)
 import(survival)
+import(DEoptimR)
 importFrom("grDevices", "dev.interactive")
 importFrom("graphics", "plot","abline", "hist", "legend", "mtext", "par",
              "points", "text", "title")
