@@ -1,4 +1,4 @@
-e57d58ca728b96f8e847207a515e6db5 *DESCRIPTION
+e8ce4150002a04de0cf575e7a4877c82 *DESCRIPTION
 eb8beb19a5b9ee334feaba844ed22790 *NAMESPACE
 683b9ef4eb0b637b0669f7c08716da5d *R/AV.MM.gauss.R
 dc2c0744fe9e79528aa9e70f6b48744c *R/AveS20w.R
@@ -229,7 +229,7 @@ f6a22db2f78ad92f93867d9c9015c303 *data/Z243.rda
 dec103f798b141d0d91da290e3787598 *man/D243.Rd
 59aedfbe1126879380051e74e8e6480d *man/MCI.rd
 11014fae463a167c03d550357eadd8b0 *man/RobustAFT-internal.Rd
-85cad1fb83a61c0607525fe0179be8e8 *man/RobustAFT-package.Rd
+b391715c0cac11b811d4f0888a89893b *man/RobustAFT-package.Rd
 7937205a23959ed5df0db672e3e7519c *man/TML.censored.control.S.rd
 6711ebd7bbde3aecf7667da402956b43 *man/TML.censored.control.ref.rd
 1ff4624ff59f9181e303096b21dc3a0d *man/TML.censored.control.tml.rd
