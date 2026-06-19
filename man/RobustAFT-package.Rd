@@ -16,16 +16,16 @@ The main functions of this package are \code{\link{TML.noncensored}} and \code{\
 \tabular{ll}{
 Package: \tab RobustAFT\cr
 Type: \tab Package\cr
-#Version: \tab 1.4-6\cr
+Version: \tab 1.4-10\cr
 #Date: \tab 2023-06-19\cr
 License: \tab GPL-2 or later\cr
 LazyLoad: \tab yes\cr
 }
 }
 \author{
-Alfio Marazzi <Alfio.Marazzi@chuv.ch>, Jean-Luc Muralti
+Alfio Marazzi <Alfio.Marazzi@unisante.ch>
 
-Maintainer: A. Randriamiharisoa <Alex.Randriamiharisoa@chuv.ch>
+Maintainer: A. Randriamiharisoa <exelami@gmail.com>
 }
 \references{
   Marazzi A., Yohai V. (2004). Adaptively truncated maximum likelihood regression with asymmetric 
